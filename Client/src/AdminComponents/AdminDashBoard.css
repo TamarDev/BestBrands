@@ -1,0 +1,1064 @@
+/* =========================================================
+   ADMIN DASHBOARD
+   ========================================================= */
+
+.dashboard-page {
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 35px 30px 60px;
+
+    box-sizing: border-box;
+
+    color: #111827;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+.dashboard-label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #9ca3af;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 1.8px;
+}
+
+.dashboard-header h1 {
+    margin: 0;
+
+    color: #111827;
+
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.dashboard-header p {
+    margin: 8px 0 0;
+
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   SYSTEM STATUS
+   ========================================================= */
+
+.dashboard-status {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 10px 16px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+
+    color: #4b5563;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.025);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+
+    display: block;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    box-shadow: 0 0 0 3px #dcfce7;
+}
+
+
+/* =========================================================
+   STAT CARDS
+   ========================================================= */
+
+.dashboard-stats {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-bottom: 42px;
+}
+
+.stat-card {
+    min-height: 108px;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.025);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #d1d5db;
+
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.06);
+}
+
+
+/* ICON / NUMBER */
+
+.stat-icon {
+    width: 43px;
+    height: 43px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #111827;
+
+    border-radius: 8px;
+
+    color: #ffffff;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* CONTENT */
+
+.stat-card > div:nth-child(2) {
+    flex: 1;
+}
+
+.stat-card span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #9ca3af;
+
+    font-size: 12px;
+}
+
+.stat-card strong {
+    display: block;
+
+    color: #111827;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+/* ARROW */
+
+.stat-card > a {
+    color: #9ca3af;
+
+    text-decoration: none;
+
+    font-size: 20px;
+    font-weight: 400;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.stat-card:hover > a {
+    color: #111827;
+
+    transform: translateX(-3px);
+}
+
+
+/* =========================================================
+   SECTION
+   ========================================================= */
+
+.dashboard-section {
+    margin-bottom: 42px;
+}
+
+.dashboard-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 18px;
+}
+
+.dashboard-section-header h2 {
+    margin: 0;
+
+    color: #111827;
+
+    font-size: 19px;
+    font-weight: 750;
+}
+
+.dashboard-section-header p {
+    margin: 6px 0 0;
+
+    color: #9ca3af;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   MANAGEMENT GRID
+   ========================================================= */
+
+.management-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+}
+
+
+/* =========================================================
+   MANAGEMENT CARD
+   ========================================================= */
+
+.management-card {
+    position: relative;
+
+    min-height: 145px;
+
+    padding: 24px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 18px;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.02);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.management-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #d1d5db;
+
+    box-shadow:
+        0 10px 28px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =========================================================
+   MANAGEMENT NUMBER
+   ========================================================= */
+
+.management-number {
+    width: 43px;
+    height: 43px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f9fafb;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+
+    color: #6b7280;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.management-card:hover .management-number {
+    background: #111827;
+
+    border-color: #111827;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   MANAGEMENT CONTENT
+   ========================================================= */
+
+.management-content {
+    flex: 1;
+
+    padding-top: 1px;
+}
+
+.management-content h3 {
+    margin: 0 0 8px;
+
+    color: #111827;
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.management-content p {
+    max-width: 430px;
+
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   MANAGEMENT ARROW
+   ========================================================= */
+
+.management-arrow {
+    align-self: center;
+
+    color: #9ca3af;
+
+    font-size: 19px;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.management-card:hover .management-arrow {
+    color: #111827;
+
+    transform: translateX(-4px);
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+   ========================================================= */
+
+.quick-section {
+    margin-bottom: 30px;
+}
+
+.quick-actions {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 15px;
+}
+
+
+/* =========================================================
+   QUICK ACTION
+   ========================================================= */
+
+.quick-action {
+    min-height: 78px;
+
+    padding: 16px 18px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.02);
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.quick-action:hover {
+    background: #fafafa;
+
+    border-color: #d1d5db;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.05);
+}
+
+
+/* QUICK ICON */
+
+.quick-action > span {
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #111827;
+
+    border-radius: 7px;
+
+    color: #ffffff;
+
+    font-size: 18px;
+    font-weight: 300;
+}
+
+
+/* QUICK CONTENT */
+
+.quick-action strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #111827;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.quick-action small {
+    display: block;
+
+    color: #9ca3af;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   PAGE BACKGROUND
+   ========================================================= */
+
+body {
+    margin: 0;
+
+    background: #f7f8fa;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+    .dashboard-page {
+        max-width: 100%;
+
+        padding: 30px 22px 50px;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .management-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-actions {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .dashboard-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 18px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 27px;
+    }
+
+    .dashboard-status {
+        align-self: flex-start;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .management-card {
+        min-height: 130px;
+
+        padding: 19px;
+    }
+}
+
+
+@media (max-width: 450px) {
+
+    .dashboard-page {
+        padding: 22px 15px 40px;
+    }
+
+    .dashboard-header {
+        margin-bottom: 25px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 24px;
+    }
+
+    .dashboard-header p {
+        font-size: 12px;
+
+        line-height: 1.6;
+    }
+
+    .stat-card {
+        min-height: 95px;
+
+        padding: 16px;
+    }
+
+    .management-card {
+        gap: 13px;
+    }
+
+    .management-content h3 {
+        font-size: 15px;
+    }
+
+    .management-content p {
+        font-size: 11px;
+    }
+}
+
+/* =========================================================
+   CHARTS
+   ========================================================= */
+
+.charts-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+.chart-card {
+    padding: 22px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.025);
+}
+
+.chart-card-wide {
+    grid-column: 1 / -1;
+}
+
+.chart-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    margin-bottom: 16px;
+}
+
+.chart-card-header h3 {
+    margin: 0 0 4px;
+
+    color: #111827;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.chart-card-header p {
+    margin: 0;
+
+    color: #9ca3af;
+
+    font-size: 12px;
+}
+
+.chart-card-value {
+    color: #111827;
+
+    font-size: 20px;
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+.chart-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 170px;
+
+    color: #9ca3af;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   STATUS LEGEND (donut chart)
+   ========================================================= */
+
+.status-legend {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-top: 14px;
+}
+
+.status-legend-item {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 12.5px;
+
+    color: #4b5563;
+}
+
+.status-legend-item span:nth-child(2) {
+    flex: 1;
+}
+
+.status-legend-item strong {
+    color: #111827;
+
+    font-size: 12.5px;
+}
+
+.status-legend-dot {
+    width: 8px;
+    height: 8px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+}
+
+
+/* =========================================================
+   LOW STOCK LIST
+   ========================================================= */
+
+.low-stock-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+
+    padding-top: 4px;
+}
+
+.low-stock-item {
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.low-stock-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 12.5px;
+}
+
+.low-stock-info span {
+    overflow: hidden;
+
+    color: #4b5563;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.low-stock-info strong {
+    flex-shrink: 0;
+
+    color: #111827;
+
+    font-weight: 700;
+}
+
+.low-stock-info strong.low-stock-critical {
+    color: #ef4444;
+}
+
+.low-stock-bar {
+    width: 100%;
+    height: 6px;
+
+    background: #f3f4f6;
+
+    border-radius: 4px;
+
+    overflow: hidden;
+}
+
+.low-stock-bar-fill {
+    height: 100%;
+
+    background: #111827;
+
+    border-radius: 4px;
+}
+
+.low-stock-bar-fill.low-stock-bar-critical {
+    background: #ef4444;
+}
+
+
+/* =========================================================
+   RESPONSIVE - CHARTS
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-card-wide {
+        grid-column: auto;
+    }
+}
+
+
+/* דברים שהוספתי */
+/* =========================================================
+   MESSAGES DASHBOARD
+   ========================================================= */
+
+.messages-dashboard-section {
+    margin-bottom: 42px;
+}
+
+
+/* =========================================================
+   VIEW ALL
+   ========================================================= */
+
+.messages-view-all {
+    color: #6b7280;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.messages-view-all:hover {
+    color: #111827;
+
+    transform: translateX(-3px);
+}
+
+
+/* =========================================================
+   MAIN CARD
+   ========================================================= */
+
+.messages-dashboard-card {
+    min-height: 280px;
+
+    padding: 24px;
+
+    box-sizing: border-box;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    align-items: center;
+
+    gap: 30px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.025);
+}
+
+
+/* =========================================================
+   DONUT
+   ========================================================= */
+
+.messages-donut-wrapper {
+    position: relative;
+
+    width: 100%;
+    height: 250px;
+}
+
+.messages-donut-center {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    pointer-events: none;
+}
+
+.messages-donut-center strong {
+    color: #111827;
+
+    font-size: 30px;
+    font-weight: 800;
+
+    line-height: 1;
+}
+
+.messages-donut-center span {
+    margin-top: 7px;
+
+    color: #9ca3af;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   STATUS SUMMARY
+   ========================================================= */
+
+.messages-status-summary {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+.messages-status-item {
+    min-height: 90px;
+
+    padding: 18px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    background: #fafafa;
+
+    border: 1px solid #f0f1f3;
+    border-radius: 9px;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.messages-status-item:hover {
+    transform: translateY(-2px);
+
+    background: #ffffff;
+
+    border-color: #e5e7eb;
+}
+
+
+/* =========================================================
+   STATUS TITLE
+   ========================================================= */
+
+.messages-status-title {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    color: #6b7280;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.messages-status-dot {
+    width: 8px;
+    height: 8px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+}
+
+
+/* =========================================================
+   STATUS NUMBER
+   ========================================================= */
+
+.messages-status-item strong {
+    color: #111827;
+
+    font-size: 24px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .messages-dashboard-card {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+    .messages-donut-wrapper {
+        max-width: 360px;
+
+        margin: 0 auto;
+    }
+}
+
+
+@media (max-width: 450px) {
+
+    .messages-dashboard-card {
+        padding: 15px;
+    }
+
+    .messages-status-summary {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 8px;
+    }
+
+    .messages-status-item {
+        min-height: 80px;
+
+        padding: 13px;
+    }
+}

@@ -1,0 +1,350 @@
+
+.about-page {
+  min-height: 100vh;
+  background: #f5f5f3;
+  color: #171717;
+  padding-bottom: 90px;
+  font-family: inherit;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.about-hero {
+  position: relative;
+  min-height: 430px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      rgba(10, 10, 10, 0.88),
+      rgba(10, 10, 10, 0.88)
+    ),
+    radial-gradient(
+      circle at center,
+      #3a3a3a 0%,
+      #111 70%
+    );
+
+  color: #fff;
+  text-align: center;
+  overflow: hidden;
+}
+
+.about-hero::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  top: -250px;
+  left: -150px;
+}
+
+.about-hero::after {
+  content: "";
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  bottom: -500px;
+  right: -150px;
+}
+
+.about-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  padding: 40px 20px;
+}
+
+.about-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  color: #bdbdbd;
+  margin-bottom: 22px;
+}
+
+.about-hero h1 {
+  margin: 0;
+  font-size: clamp(42px, 6vw, 68px);
+  font-weight: 500;
+  letter-spacing: -1px;
+}
+
+.about-line {
+  width: 55px;
+  height: 1px;
+  background: #fff;
+  margin: 25px auto;
+  opacity: 0.7;
+}
+
+.about-hero p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 300;
+  color: #d7d7d7;
+  letter-spacing: 0.3px;
+}
+
+/* =========================
+   ABOUT CARD
+========================= */
+
+.about-card {
+  position: relative;
+  width: min(88%, 1000px);
+
+  margin: -65px auto 80px;
+
+  background: #fff;
+
+  padding: 65px 80px;
+
+  border: 1px solid #e8e8e8;
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.08);
+
+  z-index: 5;
+}
+
+.section-label {
+  display: block;
+
+  text-align: center;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  letter-spacing: 3px;
+
+  color: #888;
+
+  margin-bottom: 14px;
+}
+
+.about-card h2 {
+  margin: 0 0 35px;
+
+  text-align: center;
+
+  font-size: 34px;
+  font-weight: 500;
+
+  color: #161616;
+}
+
+.about-card h2::after {
+  content: "";
+
+  display: block;
+
+  width: 35px;
+  height: 1px;
+
+  background: #222;
+
+  margin: 18px auto 0;
+}
+
+.about-card p {
+  margin: 0 0 22px;
+
+  color: #5d5d5d;
+
+  font-size: 17px;
+
+  line-height: 2;
+
+  font-weight: 300;
+}
+
+.about-card p:last-child {
+  margin-bottom: 0;
+}
+
+/* =========================
+   FEATURES
+========================= */
+
+.features {
+  width: min(88%, 1200px);
+
+  margin: auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 1px;
+
+  background: #dedede;
+
+  border: 1px solid #dedede;
+}
+
+.feature-box {
+  position: relative;
+
+  background: #fff;
+
+  padding: 50px 35px;
+
+  text-align: center;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.feature-box:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.08);
+
+  z-index: 2;
+}
+
+.feature-number {
+  font-size: 12px;
+
+  letter-spacing: 3px;
+
+  color: #999;
+
+  margin-bottom: 25px;
+}
+
+.feature-box h3 {
+  margin: 0 0 15px;
+
+  font-size: 21px;
+
+  font-weight: 500;
+
+  color: #1a1a1a;
+}
+
+.feature-box p {
+  max-width: 270px;
+
+  margin: auto;
+
+  color: #777;
+
+  font-size: 15px;
+
+  line-height: 1.9;
+
+  font-weight: 300;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+  .about-hero {
+    min-height: 360px;
+  }
+
+  .about-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+  }
+
+  .about-hero h1 {
+    font-size: 42px;
+  }
+
+  .about-hero p {
+    font-size: 16px;
+  }
+
+  .about-card {
+    width: 88%;
+
+    margin-top: -45px;
+
+    padding: 45px 28px;
+
+    margin-bottom: 55px;
+  }
+
+  .about-card h2 {
+    font-size: 29px;
+  }
+
+  .about-card p {
+    font-size: 16px;
+    line-height: 1.9;
+  }
+
+  .features {
+    width: 88%;
+
+    grid-template-columns: 1fr;
+  }
+
+  .feature-box {
+    padding: 40px 25px;
+  }
+
+  .feature-box:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+  .about-hero {
+    min-height: 320px;
+  }
+
+  .about-hero-content {
+    padding: 30px 15px;
+  }
+
+  .about-hero h1 {
+    font-size: 36px;
+  }
+
+  .about-hero p {
+    font-size: 15px;
+  }
+
+  .about-card {
+    padding: 38px 22px;
+  }
+
+  .about-card h2 {
+    font-size: 26px;
+  }
+
+  .about-card p {
+    font-size: 15px;
+  }
+
+  .feature-box {
+    padding: 35px 20px;
+  }
+}
+

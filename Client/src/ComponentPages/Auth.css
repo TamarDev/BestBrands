@@ -1,0 +1,471 @@
+/* ====== עמוד ====== */
+
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(6px);
+
+    padding: 40px;
+}
+
+
+/* ====== כרטיס ====== */
+
+.auth-card {
+
+    width: 520px;
+    max-width: 95%;
+
+    background: #fff;
+
+    padding: 55px;
+
+    border-radius: 4px;
+
+    box-shadow: 0 20px 45px rgba(0,0,0,.25);
+
+    animation: popup .35s ease;
+}
+
+
+/* ====== אנימציה ====== */
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/* ====== כותרות ====== */
+
+.auth-card h2{
+
+    text-align:center;
+
+    font-size:38px;
+
+    font-weight:600;
+
+    margin-bottom:10px;
+
+}
+
+
+.subtitle{
+
+    text-align:center;
+
+    color:#777;
+
+    font-size:16px;
+
+    margin-bottom:35px;
+
+}
+
+
+/* ====== כפתור גוגל ====== */
+
+.google-btn{
+
+    width:100%;
+
+    height:58px;
+
+    border:1px solid #ddd;
+
+    background:#fff;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    border-radius:3px;
+
+    transition:.25s;
+
+    margin-bottom:30px;
+
+}
+
+.google-btn:hover{
+
+    background:#f5f5f5;
+
+}
+
+.google-btn-wrapper{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-bottom:30px;
+
+}
+
+
+/* ====== מפריד ====== */
+
+.divider{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    color:#888;
+
+    margin-bottom:30px;
+
+}
+
+.mode-switch {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px;
+    margin-bottom: 8px;
+    background: #f5f5f5;
+    border-radius: 999px;
+}
+
+.mode-indicator {
+    position: absolute;
+    top: 6px;
+    bottom: 6px;
+    width: calc(50% - 10px);
+    background: #FFD400;
+    border-radius: 999px;
+    transition: transform 0.25s ease;
+    box-shadow: 0 6px 12px rgba(255, 212, 0, 0.2);
+}
+
+.mode-indicator.left {
+    transform: translateX(0);
+}
+
+.mode-indicator.right {
+    transform: translateX(calc(100% + 8px));
+}
+
+.mode-option {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 12px 0;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.25s ease;
+}
+
+.mode-option.active {
+    color: #111;
+}
+
+.mode-hint {
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.divider::before,
+
+.divider::after{
+
+    content:"";
+
+    flex:1;
+
+    height:1px;
+
+    background:#ddd;
+
+}
+
+
+/* ====== טופס ====== */
+
+.auth-card form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+
+/* ====== שדות ====== */
+
+.auth-card input{
+
+    width:100%;
+
+    height:60px;
+
+    padding:0 18px;
+
+    border:1px solid #d8d8d8;
+
+    border-radius:3px;
+
+    font-size:16px;
+
+    transition:.25s;
+
+    box-sizing:border-box;
+
+}
+
+.auth-card input:focus{
+
+    outline:none;
+
+    border-color:#FFD400;
+
+    box-shadow:0 0 8px rgba(255,212,0,.35);
+
+}
+
+
+/* ====== שכחתי סיסמה ====== */
+
+.forgot{
+
+    text-decoration:none;
+
+    color:#666;
+
+    font-size:14px;
+
+    align-self:flex-end;
+
+    transition:.2s;
+
+}
+
+.forgot:hover{
+
+    color:black;
+
+}
+
+
+/* ====== כפתור התחברות ====== */
+
+.auth-card button[type="submit"]{
+
+    margin-top:10px;
+
+    width:100%;
+
+    height:60px;
+
+    background:#FFD400;
+
+    border:none;
+
+    border-radius:3px;
+
+    font-size:19px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.auth-card button[type="submit"]:hover{
+
+    background:#f3c700;
+
+    transform:translateY(-2px);
+
+}
+
+.auth-card button[type="submit"]:active{
+
+    transform:scale(.98);
+
+}
+
+.auth-card button[type="submit"]:disabled{
+
+    background:#ddd;
+
+    cursor:not-allowed;
+
+}
+
+
+/* ====== תחתית ====== */
+
+.bottom-text{
+
+    text-align:center;
+
+    margin-top:30px;
+
+    color:#666;
+
+}
+
+.bottom-text a{
+
+    color:black;
+
+    font-weight:600;
+
+    text-decoration:none;
+
+    margin-right:6px;
+
+}
+
+.bottom-text a:hover{
+
+    text-decoration:underline;
+
+}
+
+
+/* ====== הודעות ====== */
+
+.error{
+
+    margin-top:18px;
+
+    color:#d40000;
+
+    text-align:center;
+
+}
+
+.success{
+
+    margin-top:18px;
+
+    color:#1b8b37;
+
+    text-align:center;
+
+}
+
+
+/* ====== מובייל ====== */
+
+@media(max-width:600px){
+
+.auth-card{
+
+    padding:35px 25px;
+
+}
+
+.auth-card h2{
+
+    font-size:30px;
+
+}
+
+.subtitle{
+
+    font-size:15px;
+
+}
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    width: 100%;
+    height: 45px;
+
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.google-btn:hover {
+    background: #f7f7f7;
+}
+
+.google-icon {
+    font-size: 22px;
+}
+
+/* .google-btn{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.google-icon{
+
+    width:28px;
+
+    height:28px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    border:1px solid #ddd;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-weight:bold;
+
+    color:#4285F4;
+
+}
+ */
+}

@@ -1,0 +1,14 @@
+# Client
+Client/node_modules/
+Client/dist/
+Client/.env
+
+# Server
+Server/node_modules/
+Server/.env
+
+# General
+*.log
+
+
+.env

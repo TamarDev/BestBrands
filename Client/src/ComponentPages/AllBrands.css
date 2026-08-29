@@ -1,0 +1,103 @@
+
+
+.brands-page {
+    width: 95%;
+    max-width: 1500px;
+    margin: auto;
+    padding: 50px 20px 70px;
+    background: #fff;
+    min-height: 100vh;
+}
+
+.brands-title {
+    text-align: center;
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 35px;
+    letter-spacing: 1px;
+}
+
+.brand-search {
+    display: block;
+    width: 360px;
+    max-width: 90%;
+    margin: 0 auto 55px;
+    padding: 14px 18px;
+    border: 1px solid #dcdcdc;
+    border-radius: 40px;
+    outline: none;
+    font-size: 16px;
+    transition: .25s;
+}
+
+.brand-search:focus {
+    border-color: #111;
+}
+
+.no-results {
+    text-align: center;
+    padding: 40px 20px;
+    margin-bottom: 40px;
+    background: #fef3cd;
+    border: 1px solid #ffc107;
+    border-radius: 8px;
+    color: #856404;
+}
+
+.no-results p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.brands-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 35px;
+}
+
+.brand-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.brand-card {
+    height: 170px;
+    background: white;
+    border: 1px solid #e8e8e8;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: .25s ease;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.brand-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.08);
+    border-color: #d6d6d6;
+}
+
+.brand-image {
+    max-width: 72%;
+    max-height: 70%;
+    object-fit: contain;
+    transition: .25s;
+}
+
+.brand-card:hover .brand-image {
+    transform: scale(1.05);
+}
+
+.brand-name {
+    display: none;
+}
+
+.no-image {
+    color: #999;
+    font-size: 15px;
+    text-align: center;
+}
