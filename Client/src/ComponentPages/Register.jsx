@@ -1,5 +1,5 @@
 import "./Auth.css";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, continueWithGoogle } from "../store/slices/AuthSlice";
 import { Link } from "react-router-dom";
@@ -40,9 +40,14 @@ export default function Register() {
 
     };
 
-    const handleGoogleSuccess = (credentialResponse) => {
+    // מיוצב עם useCallback כדי ש-<GoogleLogin> לא יאתחל מחדש את google.accounts.id בכל render
+    const handleGoogleSuccess = useCallback((credentialResponse) => {
         dispatch(continueWithGoogle({ credential: credentialResponse.credential, mode: "register" }));
-    };
+    }, [dispatch]);
+
+    const handleGoogleError = useCallback(() => {
+        console.log("Google signup failed");
+    }, []);
 
     return(
 
@@ -61,7 +66,7 @@ export default function Register() {
                 <div className="google-btn-wrapper">
                     <GoogleLogin
                         onSuccess={handleGoogleSuccess}
-                        onError={() => console.log("Google signup failed")}
+                        onError={handleGoogleError}
                         text="signup_with"
                         locale="he"
                     />
