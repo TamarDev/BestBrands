@@ -951,16 +951,38 @@ const AdminProducts = () => {
                     <div className="ADMAIN-form-group">
 
                       <label>
-                        קישור לתמונה
+                        תמונה
                       </label>
 
+                      {typeof editingProduct.image === "string" &&
+                        editingProduct.image && (
+                          <div className="ADMAIN-edit-image-preview">
+                            <img
+                              src={editingProduct.image}
+                              alt={editingProduct.name}
+                            />
+                          </div>
+                        )}
+
+                      {editingProduct.image instanceof File && (
+                        <div className="ADMAIN-edit-image-preview">
+                          <img
+                            src={URL.createObjectURL(
+                              editingProduct.image
+                            )}
+                            alt={editingProduct.name}
+                          />
+                        </div>
+                      )}
+
                       <input
-                        name="image"
-                        value={
-                          editingProduct.image
-                        }
-                        onChange={
-                          handleEditChange
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) =>
+                          setEditingProduct({
+                            ...editingProduct,
+                            image: e.target.files[0],
+                          })
                         }
                       />
 

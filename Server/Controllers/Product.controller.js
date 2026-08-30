@@ -159,11 +159,29 @@ export const addProduct = async (req, res) => {
 
 export const UpdateProduct = async (req, res) => {
   try {
+    const productData = {
+      ...req.body,
+      sizes: JSON.parse(req.body.sizes),
+    };
+
+    const normalizedProduct =
+      normalizeProductPayload(productData);
+
+    if (req.file) {
+      const result = await uploadToCloudinary(
+        req.file.buffer
+      );
+
+      normalizedProduct.image = result.secure_url;
+    }
+
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
-      normalizeProductPayload(req.body),
+      normalizedProduct,
       { new: true }
-    );
+    )
+      .populate("brand")
+      .populate("category");
 
     if (!updatedProduct) {
       return res.status(404).json({ message: "Product not found" });

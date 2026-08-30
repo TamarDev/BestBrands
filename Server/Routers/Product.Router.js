@@ -21,7 +21,7 @@ ProductRouter.get('/GetById/:id', getProductById)
 ProductRouter.use(AuthMiddleware,CheckRole("admin"));
 
 ProductRouter.post('/Add',upload.single("image"), addProduct)
-ProductRouter.put('/Update/:id', UpdateProduct)
+ProductRouter.put('/Update/:id', upload.single("image"), UpdateProduct)
 ProductRouter.delete('/Delete/:id', deleteProduct)
 
 export default ProductRouter

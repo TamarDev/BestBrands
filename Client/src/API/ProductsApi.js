@@ -52,9 +52,24 @@ export const addProduct = async (productData) => {
 
   // עדכון מוצר (Admin)
   export const updateProduct = async (productId, productData) => {
-    
-      const response = await api.put(`${route}/Update/${productId}`, productData);
-      return response.data;
+    const formData = new FormData();
+
+    formData.append("name", productData.name);
+    formData.append("description", productData.description);
+    formData.append("price", productData.price);
+    formData.append("brand", productData.brand);
+    formData.append("category", productData.category);
+    formData.append("color", productData.color);
+    formData.append("sizes", JSON.stringify(productData.sizes));
+
+    // image יכול להיות קובץ חדש (File) שנבחר מהמחשב,
+    // או מחרוזת עם הקישור לתמונה הקיימת – בשני המקרים שולחים אותו כדי לשמר את הערך
+    if (productData.image) {
+      formData.append("image", productData.image);
+    }
+
+    const response = await api.put(`${route}/Update/${productId}`, formData);
+    return response.data;
   };
 
   // מחיקת מוצר (Admin)
