@@ -22,42 +22,8 @@ export default function Home()
         <div className="home-hero-fade" />
       </section>
 
-      {/* <div className="home-perks">
-        <div className="perk">
-          <svg className="perk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-            <path d="M2 8h11v8H2z"/><path d="M13 11h4l3 3v2h-7z"/>
-            <circle cx="6.5" cy="18" r="1.6"/><circle cx="16.5" cy="18" r="1.6"/>
-          </svg>
-          <span className="perk-text">משלוח חינם מעל 300 ₪</span>
-        </div>
-        <div className="perk-divider" />
-        <div className="perk">
-          <svg className="perk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-            <path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/>
-          </svg>
-          <span className="perk-text">החזרות עד 30 יום</span>
-        </div>
-        <div className="perk-divider" />
-        <div className="perk">
-          <svg className="perk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-            <rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>
-          </svg>
-          <span className="perk-text">עד 12 תשלומים ללא ריבית</span>
-        </div>
-        <div className="perk-divider" />
-        <div className="perk">
-          <svg className="perk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-            <path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/>
-          </svg>
-          <span className="perk-text">מוצרים מקוריים ומובטחים</span>
-        </div>
-      </div> */}
-
       <section className="home-brands-section">
-        {/* <div className="home-section-head">
-          <span className="home-eyebrow">קולקציה נבחרת</span>
-          <h2 className="home-section-title">המותגים שלנו</h2>
-        </div> */}
+
         <Slider/>
       </section>
 
