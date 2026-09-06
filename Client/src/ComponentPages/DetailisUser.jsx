@@ -196,7 +196,6 @@ export default function DetailisUser() {
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
-              required
             />
           </label>
 
@@ -207,7 +206,6 @@ export default function DetailisUser() {
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
-              required
             />
           </label>
 
@@ -218,7 +216,6 @@ export default function DetailisUser() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              required
             />
           </label>
 

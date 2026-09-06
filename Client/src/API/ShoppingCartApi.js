@@ -102,16 +102,16 @@ export const clearCartServer = async () => {
 // ==========================================
 
 export const getAllCartsAdmin = async () => {
-  const response = await api.get(`${route}/all`); 
+  const response = await api.get(`${route}/`);
   return response.data;
 };
 
 export const getCartByIdAdmin = async (cartId) => {
-  const response = await api.get(`${route}/${cartId}`);
+  const response = await api.get(`${route}/GetById/${cartId}`);
   return response.data;
 };
 
 export const deleteCartAdmin = async (cartId) => {
-  const response = await api.delete(`${route}/${cartId}`);
+  const response = await api.delete(`${route}/Delete/${cartId}`);
   return response.data;
 };

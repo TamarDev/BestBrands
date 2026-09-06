@@ -14,7 +14,7 @@ export const getUserById= async (userId) => {
 //לזכור להוסיף פונקציה שמביאה מותג עפי שם המותג
 
 export const updateUser = async (userId, userData) => {
-  const response = await api.put(`${route}/Update/${userId}`, userData);
+  const response = await api.patch(`${route}/Update/${userId}`, userData);
   return response.data;
 };
 

@@ -65,6 +65,24 @@ const AdminProducts = () => {
     sizes: [],
   });
 
+  // תצוגה מקדימה לקובץ תמונה שנבחר לעריכה; נוצרת פעם אחת לכל קובץ,
+  // ומשוחררת אוטומטית כשהקובץ מתחלף או שהעריכה נסגרת (מונע דליפת זיכרון)
+  const [editingImageUrl, setEditingImageUrl] = useState(null);
+
+  useEffect(() => {
+    if (!(editingProduct.image instanceof File)) {
+      setEditingImageUrl(null);
+      return;
+    }
+
+    const url = URL.createObjectURL(editingProduct.image);
+    setEditingImageUrl(url);
+
+    return () => {
+      URL.revokeObjectURL(url);
+    };
+  }, [editingProduct.image]);
+
 
   // ==========================
   // טעינת הנתונים
@@ -964,12 +982,10 @@ const AdminProducts = () => {
                           </div>
                         )}
 
-                      {editingProduct.image instanceof File && (
+                      {editingImageUrl && (
                         <div className="ADMAIN-edit-image-preview">
                           <img
-                            src={URL.createObjectURL(
-                              editingProduct.image
-                            )}
+                            src={editingImageUrl}
                             alt={editingProduct.name}
                           />
                         </div>

@@ -38,6 +38,7 @@ import AdminUsers from './AdminComponents/AdminUser.jsx';
 import AdminProducts from './AdminComponents/AdminProducts.jsx';
 import AdminOrders from './AdminComponents/AdminOrder.jsx';
 import AdminMessage from './AdminComponents/AdminMessage.jsx';
+import AdminCarts from './AdminComponents/AdminCarts.jsx';
 
 import CartDrawer from './Components/CartDrawer/CartDrawer.jsx';
 export default function App() {
@@ -77,6 +78,7 @@ const dispatch = useDispatch();
           <Route path="brands" element={<AdminBrands/>}/>
           <Route path="products" element={<AdminProducts/>}/>
           <Route path="orders" element={<AdminOrders/>}/>
+          <Route path="carts" element={<AdminCarts/>}/>
           <Route path="users" element={<AdminUsers/>}/>
           <Route path="categories" element={<AdminCategories/>}/> 
           <Route path="messages" element={<AdminMessage/>}/> 

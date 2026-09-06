@@ -4,9 +4,10 @@ import {getAllUsers,UpdateUsers,deleteUsers,getUsersById} from '../Controllers/U
 
 const UsersRouter=express.Router()
 
-UsersRouter.put('/Update/:id',AuthMiddleware,UpdateUsers)
+UsersRouter.put('/Update/:id', AuthMiddleware, UpdateUsers)
+UsersRouter.patch('/Update/:id', AuthMiddleware, UpdateUsers)
 
-UsersRouter.use(AuthMiddleware,CheckRole("admin"));
+UsersRouter.use(AuthMiddleware, CheckRole("admin"));
 
 UsersRouter.get('/', getAllUsers);
 UsersRouter.get('/GetById/:id', getUsersById)

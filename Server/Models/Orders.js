@@ -14,7 +14,8 @@ const OrderSchema =new mongoose.Schema(
             required: true,
             min: 1,
            validate: Number.isInteger
-          }
+          },
+          size: { type: String, default: '' }
         }],
     
     total: { type: Number, default: 0 ,min:0},

@@ -49,6 +49,11 @@ export default function AdminHome() {
             <span>הזמנות</span>
           </NavLink>
 
+          <NavLink to="carts">
+            <span className="admin-nav-icon">🛒</span>
+            <span>עגלות קניות</span>
+          </NavLink>
+
           <NavLink to="products">
             <span className="admin-nav-icon">□</span>
             <span>מוצרים</span>

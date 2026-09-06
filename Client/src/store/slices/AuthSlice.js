@@ -131,6 +131,13 @@ const AuthSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+
+        // אם כבר אין טוקן שמור (למשל ניסיון כושל להתחבר כמנהל) —
+        // מנקים גם את ה-state, כדי שלא יישאר "מחובר" בלי טוקן אמיתי
+        if (!localStorage.getItem("token")) {
+          state.user = null;
+          state.token = null;
+        }
       })
       // GOOGLE AUTH
       .addCase(continueWithGoogle.pending, (state) => {

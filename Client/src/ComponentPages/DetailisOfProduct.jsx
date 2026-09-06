@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import {
   addItemToCart,
@@ -40,6 +40,7 @@ export default function DetailisOfProduct() {
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   const { id } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const {
@@ -291,8 +292,7 @@ const handleAddToCart = async () => {
             {/* חזרה */}
 
             <Button
-              component={Link}
-              to={-1}
+              onClick={() => navigate(-1)}
               sx={{
                 alignSelf: "flex-start",
 
