@@ -4,7 +4,8 @@ export const getAllMessages=async (req, res)=>{
     try{
          const messages = await Message.find({})
          .populate("userId", "firstName lastName email")
-         .sort({ createdAt: -1 });
+         .sort({ createdAt: -1 })
+         .lean();
          res.status(200).json(messages)
     }
     catch(err){

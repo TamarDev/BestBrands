@@ -1,36 +1,41 @@
 // קרוסלת מותגים
-import React from 'react';
-// 1. ייבוא ה-Link לצורך ניווט ללא רענון דף
+// ייבוא ה-Link לצורך ניווט ללא רענון דף
 import { Link } from 'react-router-dom';
 import './slider.css';
 import { fetchBrands } from '../../store/slices/BrandSlice';
-import { useEffect, useState } from 'react';
-import { useSelector,useDispatch } from 'react-redux';
+import { useEffect, useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function Slider() {
 
-  const dispatch=useDispatch();
-  const brands=useSelector((state)=> state.brands.items || []);
+  const dispatch = useDispatch();
+  const brands = useSelector((state) => state.brands.items || []);
 
-  useEffect(() => {dispatch(fetchBrands());}, [dispatch]);
+  useEffect(() => { dispatch(fetchBrands()); }, [dispatch]);
 
+  // המערך משוכפל כדי ליצור אפקט קרוסלה רציפה; מחושב מחדש רק כש-brands משתנה
+  const slides = useMemo(
+    () =>
+      [...brands, ...brands].map((brand, index) => ({
+        brand,
+        key: `${brand._id || brand.id || brand.name}-${index}`,
+      })),
+    [brands]
+  );
 
   return (
     <>
-             
-         
+
     <div className="slider-container">
 
       <div className="slider-track">
 
         {
-          // brands 
-         [...brands, ...brands].map((brand, index) => (
-            
-            <div className="slide" key={index}>
-              
-              <Link  key={brand._id || brand.id || `${brand.name}-${index}`}
-              to={`/brands/${encodeURIComponent(brand.name || '')}`}>
+          slides.map(({ brand, key }) => (
+
+            <div className="slide" key={key}>
+
+              <Link to={`/brands/${encodeURIComponent(brand.name || '')}`}>
                 <img
                   src={brand.image}
                   alt={brand.name || 'Brand'}

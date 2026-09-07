@@ -107,11 +107,7 @@ export default function Login() {
                         required
                     />
 
-                    <Link className="forgot" to="/forgot-password">
-
-                        שכחת סיסמה?
-
-                    </Link>
+                 
 
                     <button type="submit">
 

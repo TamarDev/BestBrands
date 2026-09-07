@@ -3,7 +3,7 @@ import Brands from '../Models/Brands.js';
 
 export const getAllBrands = async (req, res) => {
     try {
-        const brands = await Brands.find({});
+        const brands = await Brands.find({}).lean();
         res.status(200).json(brands);
     }
     catch (err) {

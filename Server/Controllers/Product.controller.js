@@ -62,7 +62,8 @@ export const getAllProduct = async (req, res) => {
   try {
     const products = await Product.find({})
       .populate("brand")
-      .populate("category");
+      .populate("category")
+      .lean();
 
     return res.status(200).json(products);
   } catch (err) {
@@ -82,7 +83,8 @@ export const getProductsByBrand = async (req, res) => {
 
     const products = await Product.find({ brand: brand._id })
       .populate("brand")
-      .populate("category");
+      .populate("category")
+      .lean();
 
     return res.status(200).json(products);
   } catch (err) {
@@ -197,9 +199,13 @@ export const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
 
-    await Product.findByIdAndDelete(id);
+    const deleted = await Product.findByIdAndDelete(id);
 
-    return res.status(200).json({ message: "Product deleted" });
+    if (!deleted) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    return res.status(200).json({ message: "Product deleted", product: deleted });
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }

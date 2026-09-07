@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getOrdersByUser } from "../API/OrderApi";
 import "./Orders.css";
@@ -13,14 +13,12 @@ export default function Orders() {
   const [error, setError] = useState("");
 
   // טעינת ההזמנות
-  const loadOrders = async () => {
+  const loadOrders = useCallback(async () => {
     try {
       setLoading(true);
       setError("");
 
       const data = await getOrdersByUser();
-
-      console.log("Loaded orders:", data);
 
       setOrders(data || []);
     } catch (err) {
@@ -35,21 +33,21 @@ export default function Orders() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   // טעינת ההזמנות ברגע שהעמוד נטען
   // ורק אחרי שההתחברות שוחזרה
- useEffect(() => {
-  if (!authInitialized) return;
+  useEffect(() => {
+    if (!authInitialized) return;
 
-  if (!token || !user) {
-    setOrders([]);
-    setError("יש להתחבר כדי לראות הזמנות");
-    return;
-  }
+    if (!token || !user) {
+      setOrders([]);
+      setError("יש להתחבר כדי לראות הזמנות");
+      return;
+    }
 
-  loadOrders();
-}, [authInitialized, token, user]);
+    loadOrders();
+  }, [authInitialized, token, user, loadOrders]);
 
   return (
     <section className="orders-page">
