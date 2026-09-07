@@ -16,9 +16,6 @@ const AdminUsers = () => {
 
   const [editingId, setEditingId] = useState(null);
 
-  // שדה הסיסמה כאן זמני בלבד - למעבר החד-פעמי של המשתמשים הקיימים
-  // לסיסמה מוצפנת. יש להסיר אותו מהטופס (ומ-handleEdit/handleSave/
-  // handleCancelEdit למטה) לאחר שהמעבר יושלם לכל המשתמשים.
   const emptyEditingUser = {
     firstName: "",
     lastName: "",
@@ -26,7 +23,6 @@ const AdminUsers = () => {
     address: "",
     city: "",
     role: "",
-    password: "",
   };
 
   const [editingUser, setEditingUser] = useState(emptyEditingUser);
@@ -71,7 +67,6 @@ const AdminUsers = () => {
       address: user.address || "",
       city: user.city || "",
       role: user.role || "user",
-      password: "",
     });
   };
 
@@ -94,11 +89,7 @@ const AdminUsers = () => {
 
   const handleSave = async () => {
     try {
-      // שולחים סיסמה רק אם הוזנה - שדה ריק אומר "לא לשנות סיסמה"
-      const { password, ...rest } = editingUser;
-      const payload = password ? { ...rest, password } : rest;
-
-      await updateUser(editingId, payload);
+      await updateUser(editingId, editingUser);
 
       setEditingId(null);
 
@@ -421,23 +412,6 @@ const AdminUsers = () => {
                         </option>
 
                       </select>
-
-                    </div>
-
-
-                    <div className="ADMAIN-form-group">
-
-                      <label>
-                        סיסמה חדשה (זמני - למעבר המשתמשים)
-                      </label>
-
-                      <input
-                        name="password"
-                        type="text"
-                        placeholder="השאירו ריק כדי לא לשנות סיסמה"
-                        value={editingUser.password}
-                        onChange={handleChange}
-                      />
 
                     </div>
 
