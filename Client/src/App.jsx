@@ -40,16 +40,15 @@ import AdminMessage from './AdminComponents/AdminMessage.jsx';
 import AdminCarts from './AdminComponents/AdminCarts.jsx';
 
 import CartDrawer from './Components/CartDrawer/CartDrawer.jsx';
+import RequireAdmin from './Components/RequireAdmin.jsx';
 export default function App() {
 
 const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      dispatch(fetchCurrentUser());
-    }
+    // תמיד מריצים בדיקת משתמש: אם יש טוקן — משחזרים את המשתמש,
+    // ואם אין — ה-thunk נדחה ומסמן authInitialized כדי שדפים כמו "הזמנות" ידעו שאין משתמש
+    dispatch(fetchCurrentUser());
   }, [dispatch]);
 
   return (
@@ -72,7 +71,7 @@ const dispatch = useDispatch();
         <Route path="/orders" element={<Orders />} />
         <Route path="/profile" element={<DetailisUser />} />
 
-        <Route path="/admin" element={<AdminHome/>}>
+        <Route path="/admin" element={<RequireAdmin><AdminHome/></RequireAdmin>}>
           <Route index element={<AdminDashboard />} />
           <Route path="brands" element={<AdminBrands/>}/>
           <Route path="products" element={<AdminProducts/>}/>

@@ -4,9 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   closeCartPreview,
   removeCartItem,
-  removeLocalItem,
   updateCartItemQuantity,
-  updateLocalQuantity,
 } from "../../store/slices/ShoppingCartSlice.js";
 
 import "./CartDrawer.css";
@@ -26,17 +24,9 @@ export default function CartDrawer() {
     const newQuantity = currentQuantity + change;
 
     if (newQuantity < 1) {
-      dispatch(removeLocalItem(itemData));
       dispatch(removeCartItem(itemData));
       return;
     }
-
-    dispatch(
-      updateLocalQuantity({
-        ...itemData,
-        quantity: newQuantity,
-      })
-    );
 
     dispatch(
       updateCartItemQuantity({

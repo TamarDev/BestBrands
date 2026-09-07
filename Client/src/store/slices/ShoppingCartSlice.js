@@ -35,16 +35,6 @@ const normalizeCart = (cart) => {
   };
 };
 
-const itemMatches = (cartItem, itemData) => {
-  const productId = String(itemData?.productId ?? itemData?.product?._id ?? "");
-  const size = String(itemData?.size ?? cartItem?.size ?? "");
-
-  return (
-    String(cartItem?.product?._id || cartItem?.productId) === productId &&
-    String(cartItem?.size ?? "") === size
-  );
-};
-
 // =======================
 // GET CART
 // =======================
@@ -137,38 +127,6 @@ const shoppingCartSlice = createSlice({
     resetCartError: (state) => {
       state.error = null;
     },
-    updateLocalQuantity: (state, action) => {
-      const { productId, quantity, size } = action.payload;
-
-      if (!state.cart?.items) return;
-
-      const item = state.cart.items.find((cartItem) =>
-        itemMatches(cartItem, { productId, size })
-      );
-
-      if (!item) return;
-
-      if (quantity < 1) {
-        state.cart.items = state.cart.items.filter(
-          (cartItem) => !itemMatches(cartItem, { productId, size })
-        );
-      } else {
-        item.quantity = quantity;
-      }
-
-      state.cart = normalizeCart({ ...state.cart, items: state.cart.items });
-    },
-    removeLocalItem: (state, action) => {
-      const itemData = action.payload;
-
-      if (!state.cart?.items) return;
-
-      state.cart.items = state.cart.items.filter(
-        (cartItem) => !itemMatches(cartItem, itemData)
-      );
-
-      state.cart = normalizeCart({ ...state.cart, items: state.cart.items });
-    },
     openCartPreview: (state) => {
       state.isCartPreviewOpen = true;
     },
@@ -205,21 +163,31 @@ const shoppingCartSlice = createSlice({
       })
 
       .addCase(updateCartItemQuantity.fulfilled, (state, action) => {
+        state.error = null;
         state.cart = normalizeCart(action.payload || state.cart);
+      })
+      .addCase(updateCartItemQuantity.rejected, (state, action) => {
+        state.error = action.payload;
       })
       .addCase(removeCartItem.fulfilled, (state, action) => {
+        state.error = null;
         state.cart = normalizeCart(action.payload || state.cart);
       })
+      .addCase(removeCartItem.rejected, (state, action) => {
+        state.error = action.payload;
+      })
       .addCase(clearCart.fulfilled, (state, action) => {
+        state.error = null;
         state.cart = normalizeCart(action.payload || state.cart);
+      })
+      .addCase(clearCart.rejected, (state, action) => {
+        state.error = action.payload;
       });
   },
 });
 
 export const {
   resetCartError,
-  updateLocalQuantity,
-  removeLocalItem,
   openCartPreview,
   closeCartPreview,
 } = shoppingCartSlice.actions;

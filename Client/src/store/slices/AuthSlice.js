@@ -125,12 +125,14 @@ const AuthSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
-        state.user = action.payload?.user || action.payload; 
+        state.user = action.payload?.user || action.payload;
         state.token = action.payload?.token;
+        state.authInitialized = true;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+        state.authInitialized = true;
 
         // אם כבר אין טוקן שמור (למשל ניסיון כושל להתחבר כמנהל) —
         // מנקים גם את ה-state, כדי שלא יישאר "מחובר" בלי טוקן אמיתי
@@ -150,10 +152,12 @@ const AuthSlice = createSlice({
         state.success = true;
         state.user = action.payload?.user || action.payload;
         state.token = action.payload?.token;
+        state.authInitialized = true;
       })
       .addCase(continueWithGoogle.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+        state.authInitialized = true;
       })
     // REFRESH
     .addCase(fetchCurrentUser.pending, (state) => {
@@ -186,10 +190,12 @@ const AuthSlice = createSlice({
         state.success = true;
         state.user = action.payload?.user || action.payload;
         state.token = action.payload?.token;
+        state.authInitialized = true;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+        state.authInitialized = true;
       });
   },
 });

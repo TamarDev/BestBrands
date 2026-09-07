@@ -1,8 +1,10 @@
 import axios from "axios";
 
-// 1. יצירת אובייקט Axios מותאם אישית עם כתובת הבסיס של השרת
+// 1. יצירת אובייקט Axios מותאם אישית עם כתובת הבסיס של השרת.
+// הכתובת נלקחת מ-VITE_API_URL (למשל http://localhost:1234 בפיתוח);
+// אם לא הוגדר — משתמשים בשרת הפרודקשן ב-Render כברירת מחדל.
 const api = axios.create({
-  baseURL:"https://bestbrands-8g7o.onrender.com", // 
+  baseURL: import.meta.env.VITE_API_URL || "https://bestbrands-8g7o.onrender.com",
 });
 
 // 2. הגדרת ה-Interceptor (המיירט)

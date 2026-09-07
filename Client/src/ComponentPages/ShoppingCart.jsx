@@ -7,8 +7,6 @@ import {
   fetchCart,
   removeCartItem,
   updateCartItemQuantity,
-  updateLocalQuantity,
-  removeLocalItem,
 } from "../store/slices/ShoppingCartSlice";
 
 
@@ -26,17 +24,9 @@ export default function CartPage() {
     const newQuantity = currentQuantity + change;
 
     if (newQuantity < 1) {
-      dispatch(removeLocalItem(itemData));
       dispatch(removeCartItem(itemData));
       return;
     }
-
-    dispatch(
-      updateLocalQuantity({
-        ...itemData,
-        quantity: newQuantity,
-      })
-    );
 
     dispatch(
       updateCartItemQuantity({
@@ -47,7 +37,6 @@ export default function CartPage() {
   };
 
   const handleRemoveItem = (itemData) => {
-    dispatch(removeLocalItem(itemData));
     dispatch(removeCartItem(itemData));
   };
 
@@ -59,7 +48,8 @@ export default function CartPage() {
     );
   }
 
-  if (error) {
+  // שגיאה שמונעת טעינת העגלה בכלל — מסך שגיאה מלא
+  if (error && !cart) {
     return (
       <p className="cart-message cart-error">
         שגיאה: {error}
@@ -100,6 +90,13 @@ export default function CartPage() {
           עגלת הקניות שלי
         </span>
       </div>
+
+      {/* שגיאת פעולה זמנית (למשל אין מספיק מלאי) — לא מוחקת את העגלה */}
+      {error && (
+        <p className="cart-message cart-error">
+          {error}
+        </p>
+      )}
 
       {/* רשימת המוצרים */}
       <div className="cart-container">

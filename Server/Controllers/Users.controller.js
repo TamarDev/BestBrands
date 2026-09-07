@@ -30,6 +30,12 @@ export const UpdateUsers = async (req, res) => {
         }
 
         const allowedFields = ['firstName', 'lastName', 'email', 'address', 'city', 'password'];
+
+        // רק מנהל רשאי לשנות תפקיד; אצל משתמש רגיל השדה מסונן בשקט
+        if (req.user?.role === 'admin') {
+            allowedFields.push('role');
+        }
+
         const updates = {};
 
         Object.keys(req.body || {}).forEach((key) => {
@@ -40,6 +46,10 @@ export const UpdateUsers = async (req, res) => {
 
         if (!Object.keys(updates).length) {
             return res.status(400).json({ message: "No valid fields provided for update" });
+        }
+
+        if (updates.role && !['user', 'admin'].includes(updates.role)) {
+            return res.status(400).json({ message: "Invalid role" });
         }
 
         const update = await Users.findByIdAndUpdate(
