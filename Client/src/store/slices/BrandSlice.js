@@ -20,9 +20,6 @@ export const fetchBrands = createAsyncThunk('brands/fetchBrands', async (_, thun
     const data = await getAllBrands(); 
     return data;
   } catch (error) {
-    //השורה הזאת נמצאת באופן זמני
-    console.error("שגיאה מבוצעת ב-Thunk:", error);
-
     return thunkAPI.rejectWithValue(error.response?.data || "שגיאה בטעינת המותגים");
   }
 

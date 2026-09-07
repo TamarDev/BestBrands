@@ -50,9 +50,6 @@ export const getBrandByName = async (req, res) => {
 
 export const addBrand = async (req, res) => {
     try {
-        console.log("BODY:", req.body);
-        console.log("FILES:", req.files);
-
         const { name, description, inventor } = req.body;
 
         let image;

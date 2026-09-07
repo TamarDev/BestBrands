@@ -69,9 +69,7 @@ const AdminBrands = () => {
   const handleAddBrand = () => {
     if (!newBrand.name.trim()) return;
 
-    dispatch(addNewBrand(newBrand)).then((res) => {
-      console.log(res.payload);
-    });
+    dispatch(addNewBrand(newBrand));
 
     setNewBrand(emptyBrand);
   };

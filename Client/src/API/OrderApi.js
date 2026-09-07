@@ -17,7 +17,6 @@ export const getOrdersByUser= async () => {
 };
 
 export const addOrder = async (orderData) => {
-  console.log(orderData.user);
   const response = await api.post(`${route}/Add`, orderData);
   return response.data;
 };

@@ -16,7 +16,6 @@ export default function DinamicBrand() {
   const error = useSelector((state) => state.products.error);
   const selectedBrand = useSelector((state) => state.brands?.selectedBrand);
 
-  console.log("selectedBrand:", selectedBrand);
   useEffect(() => {
     if (brandName && brandName !== "undefined" && brandName.trim() !== "") {
       const decodedName = decodeURIComponent(brandName);

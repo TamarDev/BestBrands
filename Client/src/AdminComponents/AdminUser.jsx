@@ -1,226 +1,3 @@
-// import { useEffect, useState } from "react";
-
-// import {
-//   getAllUsers,
-//   updateUser,
-//   deleteUser,
-// } from "../API/UserApi";
-
-// const AdminUsers = () => {
-//   const [users, setUsers] = useState([]);
-
-//   const [loading, setLoading] = useState(false);
-//   const [error, setError] = useState("");
-
-//   const [editingId, setEditingId] = useState(null);
-
-//   const [editingUser, setEditingUser] = useState({
-//     firstName: "",
-//     lastName: "",
-//     email: "",
-//     address: "",
-//     city: "",
-//     role: "",
-//   });
-
-//   // ==========================
-//   // טעינת המשתמשים
-//   // ==========================
-//   const loadUsers = async () => {
-//     try {
-//       setLoading(true);
-//       setError("");
-
-//       const data = await getAllUsers();
-
-//       setUsers(data);
-//     } catch (err) {
-//       setError(err.response?.data?.error || err.message);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   useEffect(() => {
-//     loadUsers();
-//   }, []);
-
-//   // ==========================
-//   // התחלת עריכה
-//   // ==========================
-//   const handleEdit = (user) => {
-//     setEditingId(user._id);
-
-//     setEditingUser({
-//       firstName: user.firstName || "",
-//       lastName: user.lastName || "",
-//       email: user.email || "",
-//       address: user.address || "",
-//       city: user.city || "",
-//       role: user.role || "user",
-//     });
-//   };
-
-//   // ==========================
-//   // שינוי ערכים
-//   // ==========================
-//   const handleChange = (e) => {
-//     setEditingUser({
-//       ...editingUser,
-//       [e.target.name]: e.target.value,
-//     });
-//   };
-
-//   // ==========================
-//   // שמירה
-//   // ==========================
-//   const handleSave = async () => {
-//     try {
-//       await updateUser(editingId, editingUser);
-
-//       setEditingId(null);
-
-//       loadUsers();
-//     } catch (err) {
-//       alert(err.response?.data?.error || err.message);
-//     }
-//   };
-
-//   // ==========================
-//   // מחיקה
-//   // ==========================
-//   const handleDelete = async (id) => {
-//     if (!window.confirm("למחוק את המשתמש?")) return;
-
-//     try {
-//       await deleteUser(id);
-
-//       loadUsers();
-//     } catch (err) {
-//       alert(err.response?.data?.error || err.message);
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <h1>ניהול משתמשים</h1>
-
-//       {loading && <p>טוען...</p>}
-
-//       {error && <p>{error}</p>}
-
-//       <hr />
-
-//       {users.map((user) => (
-//         <div
-//           key={user._id}
-//           style={{
-//             border: "1px solid gray",
-//             padding: "10px",
-//             marginBottom: "10px",
-//           }}
-//         >
-//           {editingId === user._id ? (
-//             <>
-//               <input
-//                 name="firstName"
-//                 placeholder="שם פרטי"
-//                 value={editingUser.firstName}
-//                 onChange={handleChange}
-//               />
-
-//               <input
-//                 name="lastName"
-//                 placeholder="שם משפחה"
-//                 value={editingUser.lastName}
-//                 onChange={handleChange}
-//               />
-
-//               <input
-//                 name="email"
-//                 placeholder="אימייל"
-//                 value={editingUser.email}
-//                 onChange={handleChange}
-//               />
-
-//               <input
-//                 name="address"
-//                 placeholder="כתובת"
-//                 value={editingUser.address}
-//                 onChange={handleChange}
-//               />
-
-//               <input
-//                 name="city"
-//                 placeholder="עיר"
-//                 value={editingUser.city}
-//                 onChange={handleChange}
-//               />
-
-//               <select
-//                 name="role"
-//                 value={editingUser.role}
-//                 onChange={handleChange}
-//               >
-//                 <option value="user">User</option>
-//                 <option value="admin">Admin</option>
-//               </select>
-
-//               <br />
-
-//               <button onClick={handleSave}>
-//                 שמור
-//               </button>
-
-//               <button
-//                 onClick={() => {
-//                   setEditingId(null);
-//                 }}
-//               >
-//                 ביטול
-//               </button>
-//             </>
-//           ) : (
-//             <>
-//               <h3>
-//                 {user.firstName} {user.lastName}
-//               </h3>
-
-//               <p>
-//                 <strong>אימייל:</strong> {user.email}
-//               </p>
-
-//               <p>
-//                 <strong>כתובת:</strong> {user.address}
-//               </p>
-
-//               <p>
-//                 <strong>עיר:</strong> {user.city}
-//               </p>
-
-//               <p>
-//                 <strong>תפקיד:</strong> {user.role}
-//               </p>
-
-//               <button onClick={() => handleEdit(user)}>
-//                 ערוך
-//               </button>
-
-//               <button
-//                 onClick={() => handleDelete(user._id)}
-//               >
-//                 מחק
-//               </button>
-//             </>
-//           )}
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default AdminUsers;
-
 import { useEffect, useState } from "react";
 
 import {
@@ -239,14 +16,20 @@ const AdminUsers = () => {
 
   const [editingId, setEditingId] = useState(null);
 
-  const [editingUser, setEditingUser] = useState({
+  // שדה הסיסמה כאן זמני בלבד - למעבר החד-פעמי של המשתמשים הקיימים
+  // לסיסמה מוצפנת. יש להסיר אותו מהטופס (ומ-handleEdit/handleSave/
+  // handleCancelEdit למטה) לאחר שהמעבר יושלם לכל המשתמשים.
+  const emptyEditingUser = {
     firstName: "",
     lastName: "",
     email: "",
     address: "",
     city: "",
     role: "",
-  });
+    password: "",
+  };
+
+  const [editingUser, setEditingUser] = useState(emptyEditingUser);
 
 
   // ==========================
@@ -288,6 +71,7 @@ const AdminUsers = () => {
       address: user.address || "",
       city: user.city || "",
       role: user.role || "user",
+      password: "",
     });
   };
 
@@ -310,18 +94,15 @@ const AdminUsers = () => {
 
   const handleSave = async () => {
     try {
-      await updateUser(editingId, editingUser);
+      // שולחים סיסמה רק אם הוזנה - שדה ריק אומר "לא לשנות סיסמה"
+      const { password, ...rest } = editingUser;
+      const payload = password ? { ...rest, password } : rest;
+
+      await updateUser(editingId, payload);
 
       setEditingId(null);
 
-      setEditingUser({
-        firstName: "",
-        lastName: "",
-        email: "",
-        address: "",
-        city: "",
-        role: "",
-      });
+      setEditingUser(emptyEditingUser);
 
       loadUsers();
     } catch (err) {
@@ -337,14 +118,7 @@ const AdminUsers = () => {
   const handleCancelEdit = () => {
     setEditingId(null);
 
-    setEditingUser({
-      firstName: "",
-      lastName: "",
-      email: "",
-      address: "",
-      city: "",
-      role: "",
-    });
+    setEditingUser(emptyEditingUser);
   };
 
 
@@ -647,6 +421,23 @@ const AdminUsers = () => {
                         </option>
 
                       </select>
+
+                    </div>
+
+
+                    <div className="ADMAIN-form-group">
+
+                      <label>
+                        סיסמה חדשה (זמני - למעבר המשתמשים)
+                      </label>
+
+                      <input
+                        name="password"
+                        type="text"
+                        placeholder="השאירו ריק כדי לא לשנות סיסמה"
+                        value={editingUser.password}
+                        onChange={handleChange}
+                      />
 
                     </div>
 

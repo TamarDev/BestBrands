@@ -421,44 +421,47 @@
 
 @media (max-width: 650px) {
 
-  .admin-layout {
-    flex-direction: column;
-  }
-
+  /* התפריט נשאר טור צר וקבוע בצד (sticky, כמו בדסקטופ) —
+     רק האייקונים נשארים גלויים, בלי טקסט, כדי שיתאים למסך צר */
 
   .admin-sidebar {
-    width: 100%;
+    width: 68px;
 
-    min-height: auto;
+    padding: 15px 8px;
 
-    position: relative;
-
-    padding: 15px;
+    align-items: center;
   }
 
 
   .admin-sidebar-header {
-    padding-bottom: 15px;
+    justify-content: center;
+
+    padding: 0 0 15px;
+  }
+
+
+  .admin-sidebar-header h2,
+  .admin-sidebar-header span {
+    display: none;
   }
 
 
   .admin-menu-title {
-    margin-top: 18px;
-  }
-
-
-  .admin-nav {
-    display: grid;
-
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-
-    gap: 6px;
+    display: none;
   }
 
 
   .admin-nav a {
+    justify-content: center;
+
+    padding: 0;
+
     min-height: 44px;
+  }
+
+
+  .admin-nav a span:not(.admin-nav-icon) {
+    display: none;
   }
 
 
@@ -485,12 +488,8 @@
 
 @media (max-width: 400px) {
 
-  .admin-nav {
-    grid-template-columns: 1fr;
-  }
-
-  .admin-sidebar-header h2 {
-    font-size: 1rem;
+  .admin-sidebar {
+    width: 56px;
   }
 
 }

@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken'
+import bcrypt from 'bcryptjs'
 import { OAuth2Client } from 'google-auth-library'
 import { JWT_SECRET, GOOGLE_CLIENT_ID } from '../config.js'
 import Users from '../Models/Users.js'
@@ -82,8 +83,8 @@ export const Register = async (req, res) => {
             firstName,
             lastName,
             email,
-            password, // בעתיד: להצפין עם bcrypt
-            
+            password,
+
             // isActive: true
         });
         
@@ -126,8 +127,10 @@ export const Login = async (req, res) => {
             });
         }
 
-        // בדיקת סיסמה (בעתיד: להשתמש בbcrypt להצפנה)
-        if (password !== user.password) {
+        // בדיקת סיסמה מוצפנת
+        const passwordMatches = await bcrypt.compare(password, user.password);
+
+        if (!passwordMatches) {
             return res.status(401).json({ message: "Invalid credentials" });
         }
         
@@ -253,7 +256,7 @@ export const SetPassword = async (req, res) => {
       return res.status(409).json({ message: "Password already set" });
     }
 
-    user.password = password; // בעתיד: להצפין עם bcrypt
+    user.password = password;
     await user.save();
 
     return res.status(200).json({ message: "Password set successfully" });

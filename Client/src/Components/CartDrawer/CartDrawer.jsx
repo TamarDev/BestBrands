@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -18,12 +17,6 @@ export default function CartDrawer() {
   const { cart, isCartPreviewOpen } = useSelector(
     (state) => state.cart
   );
-
-  const itemCount =
-    cart?.items?.reduce(
-      (sum, item) => sum + (item.quantity || 0),
-      0
-    ) || 0;
 
   const handleClose = () => {
     dispatch(closeCartPreview());
