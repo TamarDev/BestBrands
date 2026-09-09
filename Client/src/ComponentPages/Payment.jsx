@@ -8,7 +8,6 @@ function Payment() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart.cart);
-  const { user } = useSelector((state) => state.auth || {});
 
   const [isProcessing, setIsProcessing] = useState(false);
   const [formData, setFormData] = useState({
@@ -29,7 +28,6 @@ function Payment() {
   };
 
   const buildOrderData = () => ({
-    user: user?._id || user?.id || '',
     items: cart?.items?.map((item) => ({
       product: item.product?._id || item.productId,
       quantity: item.quantity,
@@ -63,7 +61,13 @@ function Payment() {
     try {
       const order = buildOrderData();
       const createdOrder = await addOrder(order);
-      await dispatch(clearCart());
+
+      // אם ניקוי הסל נכשל — ההזמנה כבר נוצרה, לכן לא מפילים את כל התהליך
+      try {
+        await dispatch(clearCart()).unwrap();
+      } catch (clearErr) {
+        console.error("Clear cart after order failed:", clearErr);
+      }
 
       const orderId = createdOrder?._id || createdOrder?.id || createdOrder?.order?._id || '';
 

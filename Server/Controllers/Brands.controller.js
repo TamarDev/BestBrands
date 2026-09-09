@@ -103,9 +103,15 @@ export const addBrand = async (req, res) => {
 export const UpdateBrand = async (req, res) => {
     try {
 
-        const updateData = {
-            ...req.body
-        };
+        const allowedFields = ['name', 'description', 'inventor'];
+
+        const updateData = {};
+
+        Object.keys(req.body || {}).forEach((key) => {
+            if (allowedFields.includes(key)) {
+                updateData[key] = req.body[key];
+            }
+        });
 
         // תמונה רגילה
         if (req.files?.image?.[0]) {

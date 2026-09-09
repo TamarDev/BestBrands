@@ -17,13 +17,13 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-import { fetchBrands } from "../store/slices/BrandSlice";
-import { fetchProducts } from "../store/slices/ProductSlice";
+import { fetchBrands } from "../../store/slices/BrandSlice";
+import { fetchProducts } from "../../store/slices/ProductSlice";
 
-import { getAllCategories } from "../API/CategoryApi";
-import { getAllUsers } from "../API/UserApi";
-import { getAllOrders } from "../API/OrderApi";
-import { getAllMessages } from "../API/Message.js";
+import { getAllCategories } from "../../API/CategoryApi";
+import { getAllUsers } from "../../API/UserApi";
+import { getAllOrders } from "../../API/OrderApi";
+import { getAllMessages } from "../../API/Message.js";
 
 import "./AdminDashBoard.css";
 
@@ -350,6 +350,10 @@ export default function AdminDashboard() {
     useState([]);
 
 
+  const [statsError, setStatsError] =
+    useState("");
+
+
   // =========================================================
   // טעינת נתוני הדשבורד
   // =========================================================
@@ -407,11 +411,20 @@ export default function AdminDashboard() {
         );
 
 
+        setStatsError("");
+
+
       } catch (err) {
 
         console.error(
           "שגיאה בטעינת נתוני הדשבורד:",
           err
+        );
+
+        setStatsError(
+          err.response?.data?.message ||
+          err.response?.data?.error ||
+          "שגיאה בטעינת נתוני הדשבורד"
         );
 
       }
@@ -549,6 +562,24 @@ export default function AdminDashboard() {
         </div>
 
       </header>
+
+
+      {statsError && (
+
+        <div
+          style={{
+            background: "#fdecea",
+            color: "#b3261e",
+            padding: "10px 16px",
+            borderRadius: "8px",
+            fontWeight: 600,
+            marginBottom: "20px",
+          }}
+        >
+          ⚠️ {statsError}
+        </div>
+
+      )}
 
 
       {/* =================================================

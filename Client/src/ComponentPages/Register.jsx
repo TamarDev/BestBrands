@@ -2,14 +2,15 @@ import "./Auth.css";
 import { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, continueWithGoogle } from "../store/slices/AuthSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 
 export default function Register() {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const { loading, error, user } = useSelector(state => state.auth);
+    const { loading, error } = useSelector(state => state.auth);
 
     const [formData,setFormData]=useState({
 
@@ -19,6 +20,13 @@ export default function Register() {
         password:""
 
     });
+
+    const [registered, setRegistered] = useState(false);
+
+    const goAfterAuth = useCallback((authedUser) => {
+        setRegistered(true);
+        navigate(authedUser?.role === "admin" ? "/admin" : "/");
+    }, [navigate]);
 
     const handleChange=(e)=>{
 
@@ -32,18 +40,29 @@ export default function Register() {
 
     };
 
-    const handleSubmit=(e)=>{
+    const handleSubmit = async (e) => {
 
         e.preventDefault();
+        setRegistered(false);
 
-        dispatch(registerUser(formData));
+        try {
+            const data = await dispatch(registerUser(formData)).unwrap();
+            goAfterAuth(data?.user);
+        } catch {
+            // השגיאה כבר משתקפת ב-error מה-store
+        }
 
     };
 
     // מיוצב עם useCallback כדי ש-<GoogleLogin> לא יאתחל מחדש את google.accounts.id בכל render
-    const handleGoogleSuccess = useCallback((credentialResponse) => {
-        dispatch(continueWithGoogle({ credential: credentialResponse.credential, mode: "register" }));
-    }, [dispatch]);
+    const handleGoogleSuccess = useCallback(async (credentialResponse) => {
+        try {
+            const data = await dispatch(continueWithGoogle({ credential: credentialResponse.credential, mode: "register" })).unwrap();
+            goAfterAuth(data?.user);
+        } catch {
+            // השגיאה כבר משתקפת ב-error מה-store
+        }
+    }, [dispatch, goAfterAuth]);
 
     const handleGoogleError = useCallback(() => {
         console.log("Google signup failed");
@@ -122,7 +141,7 @@ export default function Register() {
 
                     </button>
 
-                    {user &&
+                    {registered &&
 
                         <p className="success">
 

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchBrands } from "../store/slices/BrandSlice";
+import { fetchBrands } from "../../store/slices/BrandSlice";
 import "./AllBrands.css";
 
 

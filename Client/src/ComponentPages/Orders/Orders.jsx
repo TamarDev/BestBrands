@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { getOrdersByUser } from "../API/OrderApi";
+import { getOrdersByUser } from "../../API/OrderApi";
 import "./Orders.css";
 
 export default function Orders() {

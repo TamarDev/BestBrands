@@ -45,26 +45,21 @@ app.use('/User',UserRouter);
 app.use("/Message", MessageRouter);
 
 //פונקצית חיבור ל-mongoDB
-const connectDB=async()=>{
-    try{
-        await mongoose.connect(MONGO_URI)
-        console.log("DB:", mongoose.connection.name);
-        console.log("connect DB")
-    }
-    catch(err){
-      console.log("error"+err);
-    }
-    
+const connectDB = async () => {
+    await mongoose.connect(MONGO_URI)
+    console.log("DB:", mongoose.connection.name);
+    console.log("connect DB")
 }
 
 
 
 
-connectDB().then(()=>{
+connectDB().then(() => {
     app.listen(process.env.PORT || 1234, () => {
     console.log(`app running on port ${process.env.PORT || 1234}`)
 })
-}).catch(err=>{
-    console.log("error connecting to DB",err);
+}).catch(err => {
+    console.error("error connecting to DB", err);
+    process.exit(1);
 })
 

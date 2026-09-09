@@ -2,35 +2,54 @@ import "./Auth.css";
 import { loginUser, continueWithGoogle } from "../store/slices/AuthSlice";
 import { useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 
 export default function Login() {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const { loading, error, user } = useSelector(state => state.auth);
+    const { loading, error } = useSelector(state => state.auth);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loginMode, setLoginMode] = useState("user");
+    const [loggedIn, setLoggedIn] = useState(false);
 
-    const handleLogin = (e) => {
+    const goAfterLogin = useCallback((loggedInUser) => {
+        setLoggedIn(true);
+        navigate(loggedInUser?.role === "admin" ? "/admin" : "/");
+    }, [navigate]);
+
+    const handleLogin = async (e) => {
 
         e.preventDefault();
+        setLoggedIn(false);
 
-        dispatch(loginUser({
-            email,
-            password,
-            role: loginMode === "admin" ? "admin" : "user"
-        }));
+        try {
+            const data = await dispatch(loginUser({
+                email,
+                password,
+                role: loginMode === "admin" ? "admin" : "user"
+            })).unwrap();
+
+            goAfterLogin(data?.user);
+        } catch {
+            // השגיאה כבר משתקפת ב-error מה-store
+        }
 
     };
 
     // מיוצב עם useCallback כדי ש-<GoogleLogin> לא יאתחל מחדש את google.accounts.id בכל render
-    const handleGoogleSuccess = useCallback((credentialResponse) => {
-        dispatch(continueWithGoogle({ credential: credentialResponse.credential, mode: "login" }));
-    }, [dispatch]);
+    const handleGoogleSuccess = useCallback(async (credentialResponse) => {
+        try {
+            const data = await dispatch(continueWithGoogle({ credential: credentialResponse.credential, mode: "login" })).unwrap();
+            goAfterLogin(data?.user);
+        } catch {
+            // השגיאה כבר משתקפת ב-error מה-store
+        }
+    }, [dispatch, goAfterLogin]);
 
     const handleGoogleError = useCallback(() => {
         console.log("Google login failed");
@@ -117,7 +136,7 @@ export default function Login() {
 
                     {error && <p className="error">{error}</p>}
 
-                    {user &&
+                    {loggedIn &&
 
                         <p className="success">
 

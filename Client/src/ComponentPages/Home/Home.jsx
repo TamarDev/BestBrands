@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Slider from '../Components/Slider/slider.jsx'
+import Slider from '../../Components/Slider/slider.jsx'
 import './Home.css'
 
 export default function Home()

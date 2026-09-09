@@ -47,9 +47,19 @@ export const addCategory=async(req, res)=>
 
 export const UpdateCategory=async(req,res)=>{
     try{
+        const allowedFields = ['name'];
+
+        const updateData = {};
+
+        Object.keys(req.body || {}).forEach((key) => {
+            if (allowedFields.includes(key)) {
+                updateData[key] = req.body[key];
+            }
+        });
+
         let update=await Category.findByIdAndUpdate(
             req.params.id,
-            req.body,
+            updateData,
             {new:true,runValidators: true}
         );
         if(!update)

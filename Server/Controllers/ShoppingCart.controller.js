@@ -84,7 +84,7 @@ const getSelectedSizeEntry = (
 export const getAllShoppingCart = async (req, res) => {
   try {
     const shoppingCarts = await ShoppingCart.find({})
-      .populate('user')
+      .populate('user', 'firstName lastName email')
       .populate('items.product')
     res.status(200).json({ success: true, carts: shoppingCarts })
   } catch (err) {
@@ -100,7 +100,7 @@ export const getShoppingCartById = async (req, res) => {
     }
 
     const shoppingCart = await ShoppingCart.findById(id)
-      .populate('user')
+      .populate('user', 'firstName lastName email')
       .populate('items.product')
 
     if (!shoppingCart) {

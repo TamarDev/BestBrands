@@ -24,6 +24,8 @@ const buildUserResponse = (user) => ({
     lastName: user.lastName,
     email: user.email,
     role: user.role,
+    address: user.address,
+    city: user.city,
     hasPassword: !!user.password
 });
 
@@ -71,7 +73,15 @@ export const Register = async (req, res) => {
         if (!firstName || !lastName || !email || !password) {
             return res.status(400).json({ message: "All fields are required" });
         }
-        
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            return res.status(400).json({ message: "Invalid email format" });
+        }
+
+        if (password.length < 6) {
+            return res.status(400).json({ message: "Password must be at least 6 characters" });
+        }
+
         // בדיקה אם המשתמש כבר קיים
         const existingUser = await Users.findOne({ email });
         if (existingUser) {
@@ -158,10 +168,15 @@ export const GoogleAuth = async (req, res) => {
             return res.status(400).json({ message: "Google credential is required" });
         }
 
-        const ticket = await googleClient.verifyIdToken({
-            idToken: credential,
-            audience: GOOGLE_CLIENT_ID,
-        });
+        let ticket;
+        try {
+            ticket = await googleClient.verifyIdToken({
+                idToken: credential,
+                audience: GOOGLE_CLIENT_ID,
+            });
+        } catch (verifyErr) {
+            return res.status(401).json({ error: "Invalid Google credential" });
+        }
 
         const payload = ticket.getPayload();
         const { sub: googleId, email, given_name, family_name } = payload;
@@ -205,7 +220,8 @@ export const GoogleAuth = async (req, res) => {
             expiresIn: '1d'
         });
     } catch (err) {
-        return res.status(401).json({ error: "Invalid Google credential" });
+        console.error("GoogleAuth error:", err);
+        return res.status(500).json({ error: err.message });
     }
 }
 

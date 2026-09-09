@@ -2,9 +2,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchCurrentUser } from "../store/slices/AuthSlice";
-import { updateUser } from "../API/UserApi";
-import { setPassword as setPasswordRequest } from "../API/AuthApi";
+import { fetchCurrentUser } from "../../store/slices/AuthSlice";
+import { updateUser } from "../../API/UserApi";
+import { setPassword as setPasswordRequest } from "../../API/AuthApi";
 import "./DetailisUser.css";
 
 export default function DetailisUser() {

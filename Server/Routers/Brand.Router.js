@@ -1,6 +1,6 @@
 import express from 'express'
 import { AuthMiddleware,CheckRole} from '../Controllers/Auth.controller.js'
-import {getAllBrands,addBrand,UpdateBrand,getBrandById,deleteBrand, getBrandByName} from '../Controllers/Brands.controlller.js'
+import {getAllBrands,addBrand,UpdateBrand,getBrandById,deleteBrand, getBrandByName} from '../Controllers/Brands.controller.js'
 import upload from "../multer.js";
 const BrandRouter=express.Router()
 

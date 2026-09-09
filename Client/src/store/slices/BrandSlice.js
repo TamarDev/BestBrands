@@ -114,21 +114,26 @@ const brandsSlice = createSlice({
 
 
       // Add (שינוי לשם ה-Thunk החדש)
-      .addCase(addNewBrand.fulfilled, (state, action) => { state.items.push(action.payload.brand); })
-      
+      .addCase(addNewBrand.fulfilled, (state, action) => { state.error = null; state.items.push(action.payload.brand); })
+      .addCase(addNewBrand.rejected, (state, action) => { state.error = action.payload; })
+
       // Delete (שינוי לשם ה-Thunk החדש)
       .addCase(removeBrand.fulfilled, (state, action) => {
+        state.error = null;
         state.items = state.items.filter(b => (b._id || b.id) !== action.payload);
       })
-      
+      .addCase(removeBrand.rejected, (state, action) => { state.error = action.payload; })
+
       // Update (שינוי לשם ה-Thunk החדש)
       .addCase(editBrand.fulfilled, (state, action) => {
          const updatedBrand = action.payload.brand;
 
+        state.error = null;
         const idx = state.items.findIndex(b => (b._id || b.id) === (updatedBrand._id || updatedBrand.id));
         if (idx !== -1)
            state.items[idx] = updatedBrand;
-      });
+      })
+      .addCase(editBrand.rejected, (state, action) => { state.error = action.payload; });
   }
 });
 

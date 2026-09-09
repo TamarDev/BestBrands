@@ -2,10 +2,10 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProductByBrand } from "../store/slices/ProductSlice";
-import { fetchBrandByName } from "../store/slices/BrandSlice";
+import { fetchProductByBrand } from "../../store/slices/ProductSlice";
+import { fetchBrandByName } from "../../store/slices/BrandSlice";
 import "./DinamicBrand.css";
-import Filter from "../Components/FilterSidebar/Filter";
+import Filter from "../../Components/FilterSidebar/Filter";
 
 export default function DinamicBrand() {
   const { brandName } = useParams();

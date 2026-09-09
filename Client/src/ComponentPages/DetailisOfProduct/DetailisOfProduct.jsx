@@ -5,12 +5,12 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   addItemToCart,
   openCartPreview,
-} from "../store/slices/ShoppingCartSlice";
+} from "../../store/slices/ShoppingCartSlice";
 
 import {
   clearSelectedProduct,
   fetchProductById,
-} from "../store/slices/ProductSlice";
+} from "../../store/slices/ProductSlice";
 
 import {
   Alert,

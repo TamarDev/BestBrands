@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { addMessage } from "../API/Message.js";
+import { addMessage } from "../../API/Message.js";
 import "./Contact_Us.css";
 
 export default function Contact_Us() {

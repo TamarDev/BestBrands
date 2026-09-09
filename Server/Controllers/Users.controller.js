@@ -73,7 +73,7 @@ export const UpdateUsers = async (req, res) => {
 export const deleteUsers = async (req, res) => {
     const id = req.params.id;
     try {
-        const deleted = await Users.findByIdAndDelete(id)
+        const deleted = await Users.findByIdAndDelete(id).select('-password')
         if (!deleted) return res.status(404).json({ message: "User not found" })
         res.status(200).json({ message: "User deleted successfully", user: deleted })
     } catch (err) {

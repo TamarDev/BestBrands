@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -44,7 +44,8 @@ const AdminProducts = () => {
 
 
   const [categories, setCategories] = useState([]);
-  
+  const [categoriesError, setCategoriesError] = useState("");
+
 
   const [newProduct, setNewProduct] = useState({
     ...emptyProduct,
@@ -64,6 +65,9 @@ const AdminProducts = () => {
     ...emptyProduct,
     sizes: [],
   });
+
+  const [addError, setAddError] = useState("");
+  const [editError, setEditError] = useState("");
 
   // תצוגה מקדימה לקובץ תמונה שנבחר לעריכה; נוצרת פעם אחת לכל קובץ,
   // ומשוחררת אוטומטית כשהקובץ מתחלף או שהעריכה נסגרת (מונע דליפת זיכרון)
@@ -88,18 +92,7 @@ const AdminProducts = () => {
   // טעינת הנתונים
   // ==========================
 
-  useEffect(() => {
-
-    dispatch(fetchProducts());
-
-    dispatch(fetchBrands());
-
-    loadCategories();
-
-  }, [dispatch]);
-
-
-  const loadCategories = async () => {
+  const loadCategories = useCallback(async () => {
 
     try {
 
@@ -109,11 +102,26 @@ const AdminProducts = () => {
 
     } catch (err) {
 
-      console.log(err);
+      console.error("Load categories error:", err);
+
+      setCategoriesError(
+        err.response?.data?.message || "שגיאה בטעינת הקטגוריות"
+      );
 
     }
 
-  };
+  }, []);
+
+
+  useEffect(() => {
+
+    dispatch(fetchProducts());
+
+    dispatch(fetchBrands());
+
+    loadCategories();
+
+  }, [dispatch, loadCategories]);
 
 
   // ==========================
@@ -281,26 +289,70 @@ const AdminProducts = () => {
 
 
   // ==========================
+  // ולידציה לטופס מוצר
+  // ==========================
+
+  const validateProduct = (product) => {
+
+    if (!product.name || !product.name.trim()) {
+      return "שם המוצר הוא שדה חובה";
+    }
+
+    if (
+      product.price === "" ||
+      product.price === null ||
+      product.price === undefined ||
+      Number(product.price) <= 0
+    ) {
+      return "יש להזין מחיר תקין";
+    }
+
+    if (!product.brand) {
+      return "יש לבחור מותג";
+    }
+
+    return "";
+
+  };
+
+
+  // ==========================
   // הוספת מוצר
   // ==========================
 
-  const handleAdd = () => {
+  const handleAdd = async () => {
 
-    dispatch(
-      addProductThunk(newProduct)
-    );
+    const validationError = validateProduct(newProduct);
 
+    if (validationError) {
+      setAddError(validationError);
+      return;
+    }
 
-    setNewProduct({
-      ...emptyProduct,
+    setAddError("");
 
-      sizes: [
-        {
-          size: "",
-          stock: 0,
-        },
-      ],
-    });
+    try {
+
+      await dispatch(
+        addProductThunk(newProduct)
+      ).unwrap();
+
+      setNewProduct({
+        ...emptyProduct,
+
+        sizes: [
+          {
+            size: "",
+            stock: 0,
+          },
+        ],
+      });
+
+    } catch (err) {
+
+      setAddError(err || "שגיאה בהוספת המוצר");
+
+    }
 
   };
 
@@ -345,6 +397,8 @@ const AdminProducts = () => {
 
     });
 
+    setEditError("");
+
   };
 
 
@@ -352,29 +406,44 @@ const AdminProducts = () => {
   // שמירת עריכה
   // ==========================
 
-  const handleSave = () => {
+  const handleSave = async () => {
 
-    dispatch(
-      updateProductThunk({
+    const validationError = validateProduct(editingProduct);
 
-        id: editingId,
+    if (validationError) {
+      setEditError(validationError);
+      return;
+    }
 
-        data: editingProduct,
+    setEditError("");
 
-      })
-    );
+    try {
 
+      await dispatch(
+        updateProductThunk({
 
-    setEditingId(null);
+          id: editingId,
 
+          data: editingProduct,
 
-    setEditingProduct({
+        })
+      ).unwrap();
 
-      ...emptyProduct,
+      setEditingId(null);
 
-      sizes: [],
+      setEditingProduct({
 
-    });
+        ...emptyProduct,
+
+        sizes: [],
+
+      });
+
+    } catch (err) {
+
+      setEditError(err || "שגיאה בשמירת המוצר");
+
+    }
 
   };
 
@@ -395,6 +464,8 @@ const AdminProducts = () => {
       sizes: [],
 
     });
+
+    setEditError("");
 
   };
 
@@ -488,6 +559,17 @@ const AdminProducts = () => {
         <div className="ADMAIN-message ADMAIN-error-message">
 
           ⚠️ {error}
+
+        </div>
+
+      )}
+
+
+      {categoriesError && (
+
+        <div className="ADMAIN-message ADMAIN-error-message">
+
+          ⚠️ {categoriesError}
 
         </div>
 
@@ -797,6 +879,15 @@ const AdminProducts = () => {
           </div>
 
         </div>
+
+
+        {addError && (
+
+          <div className="ADMAIN-message ADMAIN-error-message">
+            ⚠️ {addError}
+          </div>
+
+        )}
 
 
         <button
@@ -1238,6 +1329,15 @@ const AdminProducts = () => {
                     </div>
 
                   </div>
+
+
+                  {editError && (
+
+                    <div className="ADMAIN-message ADMAIN-error-message">
+                      ⚠️ {editError}
+                    </div>
+
+                  )}
 
 
                   <div className="ADMAIN-edit-actions">

@@ -156,7 +156,11 @@ const productSlice = createSlice({
       // ===== ADD =====
       .addCase(addProductThunk.fulfilled, (state, action) => {
         const newProduct = action.payload.product || action.payload;
+        state.error = null;
         state.products.push(newProduct);
+      })
+      .addCase(addProductThunk.rejected, (state, action) => {
+        state.error = action.payload;
       })
 
       // ===== UPDATE =====
@@ -165,17 +169,25 @@ const productSlice = createSlice({
         const index = state.products.findIndex(
           (p) => (p._id || p.id) === (updatedProduct._id || updatedProduct.id)
         );
+        state.error = null;
         if (index !== -1) {
           state.products[index] = updatedProduct;
         }
       })
+      .addCase(updateProductThunk.rejected, (state, action) => {
+        state.error = action.payload;
+      })
 
       // ===== DELETE =====
       .addCase(deleteProductThunk.fulfilled, (state, action) => {
-        const deletedId = action.payload; 
+        const deletedId = action.payload;
+        state.error = null;
         state.products = state.products.filter(
           (p) => (p._id || p.id) !== deletedId
         );
+      })
+      .addCase(deleteProductThunk.rejected, (state, action) => {
+        state.error = action.payload;
       });
   },
 });

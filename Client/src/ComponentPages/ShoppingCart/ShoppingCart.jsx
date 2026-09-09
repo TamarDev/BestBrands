@@ -7,7 +7,7 @@ import {
   fetchCart,
   removeCartItem,
   updateCartItemQuantity,
-} from "../store/slices/ShoppingCartSlice";
+} from "../../store/slices/ShoppingCartSlice";
 
 
 export default function CartPage() {

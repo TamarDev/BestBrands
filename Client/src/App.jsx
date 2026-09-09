@@ -7,31 +7,31 @@ import { fetchCurrentUser} from "./store/slices/AuthSlice.js";
 import './App.css';
 import Nav from './Components/Grid/Nav/Nav.jsx';
 import Footer from './Components/Grid/Footer/Footer.jsx';
-import Home from './ComponentPages/Home.jsx';
+import Home from './ComponentPages/Home/Home.jsx';
 
 import ScrollToTop from './Components/Scrolltotop.jsx';
 
 
-import Aboat from './ComponentPages/Aboat.jsx';
-import Contact_Us from './ComponentPages/Contact_Us.jsx';
-import DetailisOfProduct from './ComponentPages/DetailisOfProduct.jsx';
+import Aboat from './ComponentPages/Aboat/Aboat.jsx';
+import Contact_Us from './ComponentPages/Contact_Us/Contact_Us.jsx';
+import DetailisOfProduct from './ComponentPages/DetailisOfProduct/DetailisOfProduct.jsx';
 
 import Header from './Components/Grid/Header/Header.jsx';
 
 import Payment from './ComponentPages/Payment.jsx';
 import PaymentSuccess from './ComponentPages/PaymentSuccess.jsx';
 // import PaymentCancel from './ComponentPages/PaymentCancel.jsx';
-import ShoppingCart from './ComponentPages/ShoppingCart.jsx';
-import AllBrands from './ComponentPages/AllBrands.jsx';
-import DinamicBrand from './ComponentPages/DinamicBrand.jsx';
+import ShoppingCart from './ComponentPages/ShoppingCart/ShoppingCart.jsx';
+import AllBrands from './ComponentPages/AllBrands/AllBrands.jsx';
+import DinamicBrand from './ComponentPages/DinamicBrand/DinamicBrand.jsx';
 import Register from './ComponentPages/Register.jsx';
 import Login from './ComponentPages/Login.jsx';
-import Orders from './ComponentPages/Orders.jsx';
-import DetailisUser from './ComponentPages/DetailisUser.jsx';
+import Orders from './ComponentPages/Orders/Orders.jsx';
+import DetailisUser from './ComponentPages/DetailisUser/DetailisUser.jsx';
 
-import AdminHome from './AdminComponents/AdminHome.jsx';
+import AdminHome from './AdminComponents/AdminHome/AdminHome.jsx';
 import AdminBrands from './AdminComponents/AdminBrands.jsx';
-import AdminDashboard from './AdminComponents/AdminDashBoard.jsx';
+import AdminDashboard from './AdminComponents/AdminDashBoard/AdminDashBoard.jsx';
 import AdminCategories from './AdminComponents/AdminCategories.jsx';
 import AdminUsers from './AdminComponents/AdminUser.jsx';
 import AdminProducts from './AdminComponents/AdminProducts.jsx';

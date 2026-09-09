@@ -44,9 +44,7 @@ const normalizeProductPayload = ({
   color,
   sizes,
 }) => {
-  const normalizedSizes = normalizeSizes(sizes);
-
-  return {
+  const payload = {
     name,
     image,
     description,
@@ -54,8 +52,13 @@ const normalizeProductPayload = ({
     brand,
     category,
     color,
-    sizes: normalizedSizes,
   };
+
+  if (sizes !== undefined) {
+    payload.sizes = normalizeSizes(sizes);
+  }
+
+  return payload;
 };
 
 export const getAllProduct = async (req, res) => {
@@ -128,9 +131,16 @@ export const getProductById = async (req, res) => {
 
 export const addProduct = async (req, res) => {
   try {
+    let parsedSizes;
+    try {
+      parsedSizes = JSON.parse(req.body.sizes ?? "[]");
+    } catch {
+      return res.status(400).json({ error: "sizes must be valid JSON" });
+    }
+
     const productData = {
       ...req.body,
-      sizes: JSON.parse(req.body.sizes),
+      sizes: parsedSizes,
     };
 
     const normalizedProduct =
@@ -161,10 +171,15 @@ export const addProduct = async (req, res) => {
 
 export const UpdateProduct = async (req, res) => {
   try {
-    const productData = {
-      ...req.body,
-      sizes: JSON.parse(req.body.sizes),
-    };
+    const productData = { ...req.body };
+
+    if (req.body.sizes !== undefined) {
+      try {
+        productData.sizes = JSON.parse(req.body.sizes);
+      } catch {
+        return res.status(400).json({ error: "sizes must be valid JSON" });
+      }
+    }
 
     const normalizedProduct =
       normalizeProductPayload(productData);
@@ -180,7 +195,7 @@ export const UpdateProduct = async (req, res) => {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
       normalizedProduct,
-      { new: true }
+      { new: true, runValidators: true }
     )
       .populate("brand")
       .populate("category");
