@@ -18,4 +18,4 @@ export default function Header()
     )
 
 }
-//פה יהיו לי קישורים לכל הדפים זה הניתוב
+// Page navigation links go here.

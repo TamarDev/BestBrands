@@ -20,10 +20,10 @@ const UserSchema =new mongoose.Schema(
   },{collection:'Users'}
 );
 
-// מזהה האם ערך סיסמה כבר מוצפן ב-bcrypt (ולא צריך להצפין אותו שוב)
+// Determine whether the password is already encrypted with bcrypt.
 const isBcryptHash = (value) => /^\$2[aby]\$/.test(value || '');
 
-// מצפין את הסיסמה אוטומטית בכל שמירה של מסמך, אם היא שונתה וטרם הוצפנה
+// Automatically encrypt the password when saving a changed, unencrypted value.
 UserSchema.pre('save', async function () {
   if (!this.isModified('password') || !this.password || isBcryptHash(this.password)) {
     return;
@@ -32,8 +32,8 @@ UserSchema.pre('save', async function () {
   this.password = await bcrypt.hash(this.password, 10);
 });
 
-// אותה הצפנה, אבל עבור עדכונים שרצים דרך findOneAndUpdate/findByIdAndUpdate
-// (עדכונים כאלה לא מפעילים את ה-hook של 'save' מעל)
+// Apply the same encryption to updates made through findOneAndUpdate/findByIdAndUpdate.
+// These updates do not trigger the save hook above.
 UserSchema.pre('findOneAndUpdate', async function () {
   const update = this.getUpdate() || {};
   const password = update.password ?? update.$set?.password;

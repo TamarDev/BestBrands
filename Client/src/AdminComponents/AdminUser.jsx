@@ -29,7 +29,7 @@ const AdminUsers = () => {
 
 
   // ==========================
-  // טעינת המשתמשים
+  // Load users.
   // ==========================
 
   const loadUsers = async () => {
@@ -54,7 +54,7 @@ const AdminUsers = () => {
 
 
   // ==========================
-  // התחלת עריכה
+  // Start editing.
   // ==========================
 
   const handleEdit = (user) => {
@@ -72,7 +72,7 @@ const AdminUsers = () => {
 
 
   // ==========================
-  // שינוי ערכים
+  // Update values.
   // ==========================
 
   const handleChange = (e) => {
@@ -84,7 +84,7 @@ const AdminUsers = () => {
 
 
   // ==========================
-  // שמירה
+  // Save changes.
   // ==========================
 
   const handleSave = async () => {
@@ -103,7 +103,7 @@ const AdminUsers = () => {
 
 
   // ==========================
-  // ביטול עריכה
+  // Cancel editing.
   // ==========================
 
   const handleCancelEdit = () => {
@@ -114,7 +114,7 @@ const AdminUsers = () => {
 
 
   // ==========================
-  // מחיקה
+  // Delete the user.
   // ==========================
 
   const handleDelete = async (id) => {

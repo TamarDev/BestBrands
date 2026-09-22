@@ -48,7 +48,7 @@ export default function CartPage() {
     );
   }
 
-  // שגיאה שמונעת טעינת העגלה בכלל — מסך שגיאה מלא
+  // An error that prevents loading the cart entirely; show a full error screen.
   if (error && !cart) {
     return (
       <p className="cart-message cart-error">
@@ -80,7 +80,7 @@ export default function CartPage() {
   return (
     <div className="cart-page">
 
-      {/* כותרת */}
+      {/* Heading */}
       <div className="cart-header">
         <h1 className="cart-title">
           {totalItems} פריטים בסל
@@ -91,14 +91,14 @@ export default function CartPage() {
         </span>
       </div>
 
-      {/* שגיאת פעולה זמנית (למשל אין מספיק מלאי) — לא מוחקת את העגלה */}
+      {/* Temporary action error, such as insufficient stock; keep the cart intact. */}
       {error && (
         <p className="cart-message cart-error">
           {error}
         </p>
       )}
 
-      {/* רשימת המוצרים */}
+      {/* Product list */}
       <div className="cart-container">
 
         {cart.items.map((item) => (
@@ -107,7 +107,7 @@ export default function CartPage() {
             className="cart-item"
           >
 
-            {/* תמונת המוצר */}
+            {/* Product image */}
             <div className="cart-product-image-wrapper">
               <img
                 src={item.product?.image}
@@ -116,7 +116,7 @@ export default function CartPage() {
               />
             </div>
 
-            {/* פרטי המוצר */}
+            {/* Product details */}
             <div className="item-details">
 
               <h3 className="item-title">
@@ -135,7 +135,7 @@ export default function CartPage() {
 
             </div>
 
-            {/* כמות */}
+            {/* Quantity */}
             <div className="quantity-section">
 
               <span className="quantity-label">
@@ -186,7 +186,7 @@ export default function CartPage() {
 
             </div>
 
-            {/* מחיר */}
+            {/* Price */}
             <div className="price-section">
 
               <span className="unit-price">
@@ -201,7 +201,7 @@ export default function CartPage() {
 
             </div>
 
-            {/* הסרה */}
+            {/* Remove */}
             <button
               onClick={() =>
                 handleRemoveItem({
@@ -219,7 +219,7 @@ export default function CartPage() {
 
       </div>
 
-      {/* סיכום */}
+      {/* Summary */}
       <div className="cart-summary">
 
         <div className="summary-row">

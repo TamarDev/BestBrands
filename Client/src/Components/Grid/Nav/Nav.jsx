@@ -32,7 +32,7 @@ export default function Nav() {
   );
 
 
-  // טעינת העגלה בעת כניסה למשתמש
+  // Load the cart when the user signs in.
   useEffect(() => {
 
     if (token && !isAdmin) {
@@ -82,7 +82,7 @@ export default function Nav() {
   };
 
 
-  // מספר הפריטים בעגלה
+  // Number of items in the cart.
   const itemCount =
     cart?.items?.reduce(
       (sum, item) =>
@@ -96,7 +96,7 @@ export default function Nav() {
     <nav className="navbar">
 
 
-      {/* לוגו */}
+      {/* Logo */}
 
       <div className="logo">
 
@@ -107,7 +107,7 @@ export default function Nav() {
       </div>
 
 
-      {/* קישורים */}
+      {/* Links */}
 
       <div className="nav-links">
 
@@ -153,7 +153,7 @@ export default function Nav() {
       </div>
 
 
-      {/* אזור משתמש */}
+      {/* User area */}
 
       <div className="nav-user">
 
@@ -200,7 +200,7 @@ export default function Nav() {
 
 
         {/* ========================= */}
-        {/* תפריט משתמש */}
+        {/* User menu */}
         {/* ========================= */}
 
         {user?.role === "user" && (
@@ -245,7 +245,7 @@ export default function Nav() {
 
 
         {/* ========================= */}
-        {/* עגלה */}
+        {/* Cart */}
         {/* ========================= */}
 
         {!isAdmin && (

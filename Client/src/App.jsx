@@ -46,8 +46,8 @@ export default function App() {
 const dispatch = useDispatch();
 
   useEffect(() => {
-    // תמיד מריצים בדיקת משתמש: אם יש טוקן — משחזרים את המשתמש,
-    // ואם אין — ה-thunk נדחה ומסמן authInitialized כדי שדפים כמו "הזמנות" ידעו שאין משתמש
+    // Always check the user: restore the user when a token exists,
+    // otherwise the thunk is rejected and marks authInitialized so pages such as Orders know there is no user.
     dispatch(fetchCurrentUser());
   }, [dispatch]);
 

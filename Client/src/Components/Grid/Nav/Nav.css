@@ -223,7 +223,7 @@
 }
 
 
-/* מספר פריטים */
+/* Item count */
 
 .cart-badge{
     position:absolute;
@@ -447,7 +447,7 @@
     }
 }
 
-/* הוספתי */
+/* Added styles */
 
 /* =========================
    תפריט משתמש
@@ -460,7 +460,7 @@
 }
 
 
-/* אייקון המשתמש */
+/* User icon */
 
 .user-icon-btn {
   background: none;
@@ -484,7 +484,7 @@
 }
 
 
-/* התפריט הנפתח */
+/* Dropdown menu */
 
 .user-dropdown {
   position: absolute;
@@ -520,7 +520,7 @@
 }
 
 
-/* פתיחת התפריט במעבר עכבר */
+/* Open the menu on hover */
 
 .user-menu:hover .user-dropdown {
   opacity: 1;
@@ -530,7 +530,7 @@
 }
 
 
-/* קישורים בתפריט */
+/* Menu links */
 
 .user-dropdown-link {
   display: block;
@@ -554,14 +554,14 @@
 }
 
 
-/* פינות מעוגלות לקישור הראשון */
+/* Rounded corners for the first link */
 
 .user-dropdown-link:first-child {
   border-radius: 8px 8px 0 0;
 }
 
 
-/* פינות מעוגלות לקישור האחרון */
+/* Rounded corners for the last link */
 
 .user-dropdown-link:last-child {
   border-radius: 0 0 8px 8px;

@@ -421,7 +421,7 @@
 
 @media (max-width: 650px) {
 
-  /* התפריט נשאר טור צר וקבוע בצד (sticky, כמו בדסקטופ) —
+  /* Keep the menu as a narrow, fixed side column (sticky, like on desktop) —
      רק האייקונים נשארים גלויים, בלי טקסט, כדי שיתאים למסך צר */
 
   .admin-sidebar {

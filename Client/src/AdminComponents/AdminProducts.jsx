@@ -69,8 +69,8 @@ const AdminProducts = () => {
   const [addError, setAddError] = useState("");
   const [editError, setEditError] = useState("");
 
-  // תצוגה מקדימה לקובץ תמונה שנבחר לעריכה; נוצרת פעם אחת לכל קובץ,
-  // ומשוחררת אוטומטית כשהקובץ מתחלף או שהעריכה נסגרת (מונע דליפת זיכרון)
+  // Preview the image file selected for editing once per file,
+  // and release it when the file changes or editing closes to prevent leaks.
   const [editingImageUrl, setEditingImageUrl] = useState(null);
 
   useEffect(() => {
@@ -89,7 +89,7 @@ const AdminProducts = () => {
 
 
   // ==========================
-  // טעינת הנתונים
+  // Load data.
   // ==========================
 
   const loadCategories = useCallback(async () => {
@@ -125,7 +125,7 @@ const AdminProducts = () => {
 
 
   // ==========================
-  // שינוי שדות הוספה
+  // Update add-form fields.
   // ==========================
 
   const handleNewChange = (e) => {
@@ -145,7 +145,7 @@ const AdminProducts = () => {
 
 
   // ==========================
-  // שינוי שדות עריכה
+  // Update edit-form fields.
   // ==========================
 
   const handleEditChange = (e) => {
@@ -165,7 +165,7 @@ const AdminProducts = () => {
 
 
   // ==========================
-  // שינוי מידה
+  // Update a size.
   // ==========================
 
   const handleSizeChange = (
@@ -210,7 +210,7 @@ const AdminProducts = () => {
 
 
   // ==========================
-  // הוספת מידה
+  // Add a size.
   // ==========================
 
   const addSize = (productType) => {
@@ -249,7 +249,7 @@ const AdminProducts = () => {
 
 
   // ==========================
-  // מחיקת מידה
+  // Delete a size.
   // ==========================
 
   const removeSize = (
@@ -289,7 +289,7 @@ const AdminProducts = () => {
 
 
   // ==========================
-  // ולידציה לטופס מוצר
+  // Validate the product form.
   // ==========================
 
   const validateProduct = (product) => {
@@ -317,7 +317,7 @@ const AdminProducts = () => {
 
 
   // ==========================
-  // הוספת מוצר
+  // Add a product.
   // ==========================
 
   const handleAdd = async () => {
@@ -358,7 +358,7 @@ const AdminProducts = () => {
 
 
   // ==========================
-  // התחלת עריכה
+  // Start editing.
   // ==========================
 
   const handleEdit = (product) => {
@@ -403,7 +403,7 @@ const AdminProducts = () => {
 
 
   // ==========================
-  // שמירת עריכה
+  // Save edits.
   // ==========================
 
   const handleSave = async () => {
@@ -449,7 +449,7 @@ const AdminProducts = () => {
 
 
   // ==========================
-  // ביטול עריכה
+  // Cancel editing.
   // ==========================
 
   const handleCancelEdit = () => {
@@ -471,7 +471,7 @@ const AdminProducts = () => {
 
 
   // ==========================
-  // מחיקה
+  // Delete the product.
   // ==========================
 
   const handleDelete = (id) => {

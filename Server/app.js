@@ -3,7 +3,7 @@ import "dotenv/config";
 import express from 'express'
 import mongoose from 'mongoose'
 
-//הגדרות אבטחה 
+// Security configuration.
 import cors from "cors"
 
 import { MONGO_URI } from './config.js'
@@ -20,10 +20,10 @@ import MessageRouter from "./Routers/Message.Router.js";
 
 
 
-//יצירת השרת
+// Create the server.
 const app=express()
 
-//הגדרת הפונקציה שמחזירה הודעה שהשרת רץ
+// Define the function that confirms the server is running.
 app.get("/", (req, res) => {
     res.send("BestBrands Server is Running!");
 });
@@ -44,7 +44,7 @@ app.use('/ShoppingCart',ShoppingCartRouter);
 app.use('/User',UserRouter);
 app.use("/Message", MessageRouter);
 
-//פונקצית חיבור ל-mongoDB
+// Connect to MongoDB.
 const connectDB = async () => {
     await mongoose.connect(MONGO_URI)
     console.log("DB:", mongoose.connection.name);

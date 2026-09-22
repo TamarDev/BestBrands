@@ -1,10 +1,10 @@
 import api from "./Axios";
 
-// משאירים רק את החלק היחסי של הראוט, ה-baseURL כבר בפנים
+// Keep only the route-relative path; the baseURL is already configured.
 const route = "/ShoppingCart"; 
 
 // ==========================================
-//  פונקציות משתמש (USER SHOPPING CART)
+// User shopping cart functions.
 // ==========================================
 
 export const getMyCart = async () => {
@@ -35,7 +35,7 @@ export const clearCartServer = async () => {
 };
 
 // ==========================================
-//  פונקציות מנהל (ADMIN FUNCTIONS)
+// Admin functions.
 // ==========================================
 
 export const getAllCartsAdmin = async () => {

@@ -27,21 +27,21 @@ export default function Contact_Us() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // בדיקה שהמשתמש מחובר
+    // Check that the user is authenticated.
     if (!user) {
       setError("יש להתחבר לפני שליחת הודעה.");
       setSuccess("");
       return;
     }
 
-    // בדיקת נושא
+    // Validate the subject.
     if (!formData.subject.trim()) {
       setError("יש להזין נושא להודעה.");
       setSuccess("");
       return;
     }
 
-    // בדיקת תוכן ההודעה
+    // Validate the message content.
     if (!formData.body.trim()) {
       setError("יש להזין טקסט הודעה.");
       setSuccess("");
@@ -53,8 +53,7 @@ export default function Contact_Us() {
       setError("");
       setSuccess("");
 
-      // לא שולחים userId!
-      // השרת מזהה את המשתמש דרך ה-JWT
+      // Do not send userId; the server identifies the user through the JWT.
       await addMessage({
         subject: formData.subject.trim(),
         body: formData.body.trim()
@@ -62,7 +61,7 @@ export default function Contact_Us() {
 
       setSuccess("ההודעה נשלחה בהצלחה!");
 
-      // ניקוי הטופס
+      // Clear the form.
       setFormData({
         subject: "",
         body: ""
@@ -87,7 +86,7 @@ export default function Contact_Us() {
   return (
     <div className="contact-page">
 
-      {/* כותרת */}
+      {/* Heading */}
       <div className="contact-header">
         <h1>צור קשר</h1>
 
@@ -97,10 +96,10 @@ export default function Contact_Us() {
       </div>
 
 
-      {/* תוכן הדף */}
+      {/* Page content */}
       <div className="contact-content">
 
-        {/* טופס יצירת קשר */}
+        {/* Contact form */}
         <div className="contact-form-section">
 
           <h2>שליחת הודעה</h2>
@@ -110,7 +109,7 @@ export default function Contact_Us() {
             onSubmit={handleSubmit}
           >
 
-            {/* נושא */}
+            {/* Subject */}
             <label htmlFor="subject">
               נושא:
             </label>
@@ -126,7 +125,7 @@ export default function Contact_Us() {
             />
 
 
-            {/* הודעה */}
+            {/* Message */}
             <label htmlFor="body">
               הודעה:
             </label>
@@ -142,7 +141,7 @@ export default function Contact_Us() {
             ></textarea>
 
 
-            {/* הודעת שגיאה */}
+            {/* Error message */}
             {error && (
               <p className="contact-error">
                 {error}
@@ -150,7 +149,7 @@ export default function Contact_Us() {
             )}
 
 
-            {/* הודעת הצלחה */}
+            {/* Success message */}
             {success && (
               <p className="contact-success">
                 {success}
@@ -158,7 +157,7 @@ export default function Contact_Us() {
             )}
 
 
-            {/* כפתור */}
+            {/* Button */}
             <button
               type="submit"
               className="contact-submit"
@@ -172,7 +171,7 @@ export default function Contact_Us() {
         </div>
 
 
-        {/* מידע ליצירת קשר */}
+        {/* Contact information */}
         <div className="contact-info">
 
           <h2>פרטי התקשרות</h2>

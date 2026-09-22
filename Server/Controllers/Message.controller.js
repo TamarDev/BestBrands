@@ -17,7 +17,7 @@ export const addMessage = async (req, res) => {
     try {
         const { subject, body } = req.body;
 
-        // ה-userId מגיע מה-JWT
+        // userId comes from the JWT
         const userId = req.user.userId;
 
         if (!userId) {

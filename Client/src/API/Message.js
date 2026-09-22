@@ -2,13 +2,13 @@ import api from "./Axios";
 const route="/Message";
 
 
-// קבלת כל ההודעות
+// Get all messages.
 export const getAllMessages= async () => {
     const response = await api.get(`${route}/`);
     return response.data;
 };
 
-// הוספת הודעה (User)
+// Add a message (user).
 export const addMessage = async (messageData) => {
     const response = await api.post(`${route}/Add`, {
         subject: messageData.subject,
@@ -17,7 +17,7 @@ export const addMessage = async (messageData) => {
     return response.data;
 };
 
-    // מחיקת הודעה (User)
+    // Delete a message (user).
 export const deleteMessage = async (messageId) => {
 
     const response = await api.delete(`${route}/Delete/${messageId}` );

@@ -4,7 +4,7 @@ import Product from '../Models/Products.js'
 
 const isValidObjectId = (value) => mongoose.Types.ObjectId.isValid(value)
 
-// חישוב סכום מאובטח ונקי שלא משבש את ה-Document
+// Calculate a safe total without mutating the document.
 const calculateCartSum = async (cart) => {
   const productIds = cart.items.map(item => item.product);
   const products = await Product.find({ _id: { $in: productIds } });

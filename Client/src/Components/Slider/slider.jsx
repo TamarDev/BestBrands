@@ -1,5 +1,5 @@
-// קרוסלת מותגים
-// ייבוא ה-Link לצורך ניווט ללא רענון דף
+// Brand carousel.
+// Import Link for navigation without a page refresh.
 import { Link } from 'react-router-dom';
 import './slider.css';
 import { fetchBrands } from '../../store/slices/BrandSlice';
@@ -13,7 +13,7 @@ export default function Slider() {
 
   useEffect(() => { dispatch(fetchBrands()); }, [dispatch]);
 
-  // המערך משוכפל כדי ליצור אפקט קרוסלה רציפה; מחושב מחדש רק כש-brands משתנה
+  // Duplicate the array for a continuous carousel effect; recalculate only when brands changes.
   const slides = useMemo(
     () =>
       [...brands, ...brands].map((brand, index) => ({

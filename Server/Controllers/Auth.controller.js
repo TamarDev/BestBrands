@@ -66,8 +66,6 @@ export const CheckRole = (requiredRole) => {
 
 export const Register = async (req, res) => {
     try {
-        // בדיקת תקינות קלט
-        
         const { firstName, lastName, email, password } = req.body;
         
         if (!firstName || !lastName || !email || !password) {
@@ -82,27 +80,24 @@ export const Register = async (req, res) => {
             return res.status(400).json({ message: "Password must be at least 6 characters" });
         }
 
-        // בדיקה אם המשתמש כבר קיים
+        // Check if user already exists
         const existingUser = await Users.findOne({ email });
         if (existingUser) {
             return res.status(409).json({ message: "Email already registered" });
         }
-        
-        // יצירת משתמש חדש
+
         const newUser = new Users({
             firstName,
             lastName,
             email,
             password,
-
-            // isActive: true
         });
-        
+
         await newUser.save();
 
         const token = signUserToken(newUser);
 
-        // החזרת תגובה מוצלחת - מחברים את המשתמש אוטומטית
+        // Auto-login on successful registration
         return res.status(201).json({
             message: "User registered successfully",
             token,
@@ -116,38 +111,38 @@ export const Register = async (req, res) => {
 
 export const Login = async (req, res) => {
     try {
-        // בדיקת תקינות קלט
         const { email, password } = req.body;
-        
+
         if (!email || !password) {
             return res.status(400).json({ message: "Email and password are required" });
         }
-        
-        // חיפוש המשתמש בDB
+
+        // Reject non-string values to block NoSQL operator injection (e.g. {"$ne": null})
+        if (typeof email !== 'string' || typeof password !== 'string') {
+            return res.status(400).json({ message: "Invalid credentials format" });
+        }
+
         const user = await Users.findOne({ email });
-        
+
         if (!user) {
             return res.status(401).json({ message: "Invalid credentials" });
         }
 
-        // משתמש שנרשם רק דרך גוגל ולא הגדיר סיסמה
+        // Google-only account, no password set yet
         if (!user.password) {
             return res.status(401).json({
                 message: "החשבון הזה נרשם דרך Google. התחברו עם כפתור Google, או הגדירו סיסמה מהעמוד האישי לאחר ההתחברות."
             });
         }
 
-        // בדיקת סיסמה מוצפנת
         const passwordMatches = await bcrypt.compare(password, user.password);
 
         if (!passwordMatches) {
             return res.status(401).json({ message: "Invalid credentials" });
         }
-        
-        // יצירת טוקן עם פרטים מה-DB
+
         const token = signUserToken(user);
 
-        // החזרת תגובה מוצלחת עם הטוקן
         return res.status(200).json({
             message: "Login successful",
             token,
@@ -159,7 +154,7 @@ export const Login = async (req, res) => {
     }
 }
 
-//התחברות/הרשמה דרך גוגל - מתחברת לחשבון קיים או יוצרת חשבון חדש אוטומטית אם עדיין אין
+// Google login/register: links an existing account or creates a new one
 export const GoogleAuth = async (req, res) => {
     try {
         const { credential, mode } = req.body;
@@ -183,7 +178,7 @@ export const GoogleAuth = async (req, res) => {
 
         let user = await Users.findOne({ $or: [{ googleId }, { email }] });
 
-        // הפרדה בין הכפתור בעמוד ההרשמה לכפתור בעמוד ההתחברות
+        // Distinguish the register button from the login button
         if (mode === "register" && user) {
             return res.status(409).json({
                 message: "כבר נרשמתם עברו לההתחברות."
@@ -197,7 +192,7 @@ export const GoogleAuth = async (req, res) => {
         }
 
         if (!user) {
-            // אין חשבון קיים - יוצרים משתמש חדש
+            // No existing account - create one
             user = new Users({
                 firstName: given_name || '',
                 lastName: family_name || '',
@@ -206,7 +201,7 @@ export const GoogleAuth = async (req, res) => {
             });
             await user.save();
         } else if (!user.googleId) {
-            // משתמש קיים שנרשם עם מייל+סיסמה - מקשרים את חשבון הגוגל אליו
+            // Link Google to an existing email/password account
             user.googleId = googleId;
             await user.save();
         }
@@ -225,7 +220,7 @@ export const GoogleAuth = async (req, res) => {
     }
 }
 
-//קבלת המשתמש עפי הטוקן ברענון הדף
+// Restore user from token on page refresh
 export const GetMe = async (req, res) => {
   try {
     const user = await Users.findById(req.user.userId);
@@ -253,7 +248,7 @@ export const GetMe = async (req, res) => {
   }
 };
 
-// הגדרת סיסמה למשתמש שנרשם דרך גוגל ועדיין אין לו סיסמה
+// Set a password for a Google-only account
 export const SetPassword = async (req, res) => {
   try {
     const { password } = req.body;

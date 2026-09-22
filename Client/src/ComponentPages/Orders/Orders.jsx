@@ -12,7 +12,7 @@ export default function Orders() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // טעינת ההזמנות
+  // Load orders.
   const loadOrders = useCallback(async () => {
     try {
       setLoading(true);
@@ -35,8 +35,8 @@ export default function Orders() {
     }
   }, []);
 
-  // טעינת ההזמנות ברגע שהעמוד נטען
-  // ורק אחרי שההתחברות שוחזרה
+  // Load orders when the page mounts,
+  // and only after authentication has been restored.
   useEffect(() => {
     if (!authInitialized) return;
 

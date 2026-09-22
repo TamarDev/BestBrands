@@ -2,14 +2,14 @@
 import api from "./Axios";
 const route="/Product";
 
-  // קבלת כל המוצרים
+  // Get all products.
   export const getAllProducts= async () => {
    
       const response = await api.get(`${route}/`);
       return response.data;
   };
 
-  // קבלת מוצר לפי ID
+  // Get a product by ID.
   export const getProductById= async (productId) => {
    
       const response = await api.get(`${route}/GetById/${productId}`);
@@ -23,7 +23,7 @@ const route="/Product";
         return response.data;
    };
 
-  // הוספת מוצר (Admin)
+  // Add a product (admin).
 //   export const addProduct = async (productData) => {
    
 //       const response = await api.post(`${route}/Add`, productData);
@@ -50,7 +50,7 @@ export const addProduct = async (productData) => {
   return response.data;
 };
 
-  // עדכון מוצר (Admin)
+  // Update a product (admin).
   export const updateProduct = async (productId, productData) => {
     const formData = new FormData();
 
@@ -62,8 +62,8 @@ export const addProduct = async (productData) => {
     formData.append("color", productData.color);
     formData.append("sizes", JSON.stringify(productData.sizes));
 
-    // image יכול להיות קובץ חדש (File) שנבחר מהמחשב,
-    // או מחרוזת עם הקישור לתמונה הקיימת – בשני המקרים שולחים אותו כדי לשמר את הערך
+    // image can be a new file selected from the computer,
+    // or a string containing the existing image URL; send either value to preserve it.
     if (productData.image) {
       formData.append("image", productData.image);
     }
@@ -72,7 +72,7 @@ export const addProduct = async (productData) => {
     return response.data;
   };
 
-  // מחיקת מוצר (Admin)
+  // Delete a product (admin).
   export const deleteProduct= async (productId) => {
    
       const response = await api.delete(`${route}/Delete/${productId}`);

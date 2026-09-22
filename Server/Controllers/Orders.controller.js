@@ -1,13 +1,13 @@
 import Order from '../Models/Orders.js'
 import Product from '../Models/Products.js'
 
-// נרמול מידה זהה לזה שבסל ובמוצר (אותיות גדולות, בלי רווחים, ברירת מחדל ONESIZE)
+// Size normalization shared with cart and product (uppercase, no spaces, default ONESIZE)
 const normalizeOrderSize = (size) =>
   String(size || '').trim().toUpperCase().replace(/\s+/g, '') || 'ONESIZE'
 
 const ORDER_STATUSES = ['pending', 'paid', 'shipped', 'cancelled'];
 
-// מחזיר מלאי לפריטי הזמנה (ביטול/מחיקה) - אותו דפוס $elemMatch כמו ב-addOrder
+// Restocks order items on cancel/delete - same $elemMatch pattern as addOrder
 const restockItems = async (items = []) => {
   for (const item of items) {
     const size = normalizeOrderSize(item.size);
@@ -18,7 +18,7 @@ const restockItems = async (items = []) => {
   }
 };
 
-// ולידציה של items מול ה-DB (קיום מוצר, כמות, נרמול מידה וזמינותה) - משותף ל-addOrder ול-UpdateOrder
+// Validates items against the DB (product exists, quantity, size availability) - shared by addOrder and UpdateOrder
 const validateItemsAgainstStock = async (items) => {
   if (!Array.isArray(items) || items.length === 0) {
     return { error: { status: 400, message: 'Order must contain at least one item' } };
@@ -60,7 +60,7 @@ const validateItemsAgainstStock = async (items) => {
   return { normalizedItems, productMap, total };
 };
 
-// ניכוי מלאי אטומי לכל פריט; אם ניכוי נכשל, מחזיר את מה שכבר נוכה ומחזיר את הפריט שנכשל (null = הצליח)
+// Atomically decrements stock per item; rolls back on failure and returns the failed item (null = success)
 const decrementStock = async (items) => {
   const decremented = [];
   for (const item of items) {
@@ -121,7 +121,7 @@ export const addOrder = async (req, res) => {
   const user = req.user.userId;
   const { items = [], shippingAddress, note } = req.body;
   try {
-    // המחיר, נרמול המידה והמלאי נלקחים תמיד מה-DB, לא מהלקוח
+    // Price, size, and stock always come from the DB, never the client
     const validation = await validateItemsAgainstStock(items);
     if (validation.error) {
       return res.status(validation.error.status).json({ message: validation.error.message });
@@ -170,7 +170,7 @@ export const UpdateOrder = async (req, res) => {
     if (user) update.user = user;
 
     if (items) {
-      // לא מאפשרים לשנות פריטים בהזמנה ששולמה כבר
+      // Items can't be changed once an order is paid
       if (previousStatus === 'paid') {
         return res.status(400).json({ message: 'Cannot modify items of an order that has already been paid' });
       }
@@ -181,12 +181,12 @@ export const UpdateOrder = async (req, res) => {
       }
       const { normalizedItems, productMap, total } = validation;
 
-      // משחררים את המלאי השמור לפריטים הישנים לפני שמנכים את החדשים
+      // Release stock held by the old items before decrementing the new ones
       await restockItems(previousItems);
 
       const failedItem = await decrementStock(normalizedItems);
       if (failedItem) {
-        // כשלון בניכוי הפריטים החדשים - מחזירים את המצב לקדמותו
+        // New items failed to decrement - restore the previous state
         await decrementStock(previousItems.map(item => ({
           product: item.product,
           quantity: item.quantity,
@@ -207,8 +207,8 @@ export const UpdateOrder = async (req, res) => {
     if (status) update.status = status;
     if (note) update.note = note;
 
-    // מחזירים מלאי רק במעבר אל cancelled, כדי לא להחזיר פעמיים
-    // אם הפריטים הוחלפו באותה בקשה, המלאי הרלוונטי להחזרה הוא כבר update.items (החדשים, שכבר נוכו למעלה)
+    // Restock only on transition to cancelled, and only once;
+    // if items were replaced above, update.items already holds the new (decremented) ones
     if (status === 'cancelled' && previousStatus !== 'cancelled') {
       await restockItems(itemsReplaced ? update.items : previousItems);
     }
@@ -226,7 +226,7 @@ export const deleteOrder = async (req, res) => {
     const deleted = await Order.findByIdAndDelete(id);
     if (!deleted) return res.status(404).json({ message: 'Order not found' });
 
-    // אם ההזמנה כבר בוטלה, המלאי כבר הוחזר - לא להחזיר פעמיים
+    // Stock was already restored if the order was cancelled - don't double-restock
     if (deleted.status !== 'cancelled') {
       await restockItems(deleted.items);
     }

@@ -11,7 +11,7 @@ export const getUserById= async (userId) => {
   return response.data;
 };
 
-//לזכור להוסיף פונקציה שמביאה מותג עפי שם המותג
+// Remember to add a function that fetches a brand by name.
 
 export const updateUser = async (userId, userData) => {
   const response = await api.patch(`${route}/Update/${userId}`, userData);

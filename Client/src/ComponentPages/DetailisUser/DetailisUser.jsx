@@ -30,7 +30,7 @@ export default function DetailisUser() {
   const [passwordMessage, setPasswordMessage] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  // אם אין משתמש מחובר - מעבר להתחברות
+  // Redirect to login when no user is authenticated.
   useEffect(() => {
     if (!token) {
       navigate("/login");
@@ -42,7 +42,7 @@ export default function DetailisUser() {
     }
   }, [token, user, dispatch, navigate]);
 
-  // הכנסת פרטי המשתמש לטופס
+  // Populate the form with the user's details.
   useEffect(() => {
     if (user) {
       setFormData({
@@ -91,10 +91,10 @@ export default function DetailisUser() {
         city: formData.city.trim(),
       };
 
-      // עדכון המשתמש המחובר בלבד
+      // Update only the authenticated user.
       await updateUser(userId, payload);
 
-      // טעינת הנתונים המעודכנים
+      // Load the updated data.
       await dispatch(fetchCurrentUser());
 
       setMessage("הפרטים עודכנו בהצלחה");

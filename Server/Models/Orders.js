@@ -1,12 +1,11 @@
 import mongoose from 'mongoose';
 
 
-// 2. הגדרת ההזמנה כולה
 const OrderSchema =new mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
-    
-    // כאן החיבור החשוב: המערך מכיל אובייקטים מסוג OrderItemSchema
+
+    // Snapshot of each ordered item: product ref + quantity + size
     items: [{
           product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
           quantity: {

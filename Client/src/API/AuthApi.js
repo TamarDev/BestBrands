@@ -21,7 +21,7 @@ export const setPassword = async (password) => {
   return response.data;
 };
 
-//בשביל שחזור המשתמש בעת ריענון
+// Restore the user after a page refresh.
 export const getCurrentUser = async () => {
   const response = await api.get("/Auth/me");
   return response.data;

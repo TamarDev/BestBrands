@@ -62,7 +62,7 @@ function Payment() {
       const order = buildOrderData();
       const createdOrder = await addOrder(order);
 
-      // אם ניקוי הסל נכשל — ההזמנה כבר נוצרה, לכן לא מפילים את כל התהליך
+      // If clearing the cart fails, the order already exists, so do not fail the entire flow.
       try {
         await dispatch(clearCart()).unwrap();
       } catch (clearErr) {

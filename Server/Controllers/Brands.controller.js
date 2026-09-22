@@ -44,10 +44,6 @@ export const getBrandByName = async (req, res) => {
 };
 
 
-// =========================
-// ADD BRAND
-// =========================
-
 export const addBrand = async (req, res) => {
     try {
         const { name, description, inventor } = req.body;
@@ -55,7 +51,7 @@ export const addBrand = async (req, res) => {
         let image;
         let imagePage;
 
-        // תמונה רגילה
+        // Logo image
         if (req.files?.image?.[0]) {
             const result = await uploadToCloudinary(
                 req.files.image[0].buffer
@@ -64,7 +60,7 @@ export const addBrand = async (req, res) => {
             image = result.secure_url;
         }
 
-        // תמונת דף המותג
+        // Brand page banner image
         if (req.files?.imagePage?.[0]) {
             const result = await uploadToCloudinary(
                 req.files.imagePage[0].buffer
@@ -96,10 +92,6 @@ export const addBrand = async (req, res) => {
 };
 
 
-// =========================
-// UPDATE BRAND
-// =========================
-
 export const UpdateBrand = async (req, res) => {
     try {
 
@@ -113,7 +105,7 @@ export const UpdateBrand = async (req, res) => {
             }
         });
 
-        // תמונה רגילה
+        // Logo image
         if (req.files?.image?.[0]) {
             const result = await uploadToCloudinary(
                 req.files.image[0].buffer
@@ -122,7 +114,7 @@ export const UpdateBrand = async (req, res) => {
             updateData.image = result.secure_url;
         }
 
-        // תמונת דף המותג
+        // Brand page banner image
         if (req.files?.imagePage?.[0]) {
             const result = await uploadToCloudinary(
                 req.files.imagePage[0].buffer

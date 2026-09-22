@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
-// עטיפה לנתיבי הניהול: מציגה את התוכן רק למשתמש מחובר עם role === "admin"
+// Wrapper for admin routes: render content only for an authenticated admin.
 export default function RequireAdmin({ children }) {
   const { user, token, authInitialized } = useSelector((state) => state.auth);
 
-  // עדיין משחזרים את המשתמש מהטוקן — לא מפנים כדי לא לזרוק מנהל אמיתי
+  // Restore the user from the token before redirecting, so valid admins are not rejected.
   if (!authInitialized) {
     return null;
   }

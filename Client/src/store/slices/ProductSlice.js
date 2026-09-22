@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getAllProducts,addProduct,deleteProduct,updateProduct,getProductById,getProductsByBrand } from "../../API/ProductsApi";
 
-// פונקציה גנרית לתפיסת שגיאות נקייה
+// Generic helper for clean error handling.
 const handleThunkError = (err, thunkAPI) => {
   return thunkAPI.rejectWithValue(
     err.response?.data?.message || err.response?.data?.error || err.message

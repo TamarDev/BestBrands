@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-// 1. מחקנו את ה-import של axios הרגיל! אין בו צורך כאן יותר.
+// 1. The regular axios import was removed because it is no longer needed here.
 
-// 2. מייבאים את פונקציות ה-API שלנו (שימי לב לשמות)
+// 2. Import the API functions.
 import { 
   getAllBrands, 
   getBrandById, 
@@ -11,12 +11,12 @@ import {
   deleteBrand as deleteBrandFromServer 
 } from '../../API/BrandApi';
 
-// --- פעולות אסינכרוניות (Thunks) ---
+// --- Asynchronous actions (thunks) ---
 
-// קבלת כל המותגים
+// Get all brands.
 export const fetchBrands = createAsyncThunk('brands/fetchBrands', async (_, thunkAPI) => {
   try {
-    // קוראים ישירות לפונקציה מה-API. היא כבר יודעת את הכתובת ומביאה את הטוקן!
+    // Call the API function directly; it already knows the URL and adds the token.
     const data = await getAllBrands(); 
     return data;
   } catch (error) {
@@ -56,7 +56,7 @@ export const fetchBrandByName = createAsyncThunk(
   }
 );
 
-// הוספת מותג חדש
+// Add a new brand.
 export const addNewBrand = createAsyncThunk('brands/addBrand', async (newBrandData, thunkAPI) => {
   try {
     const data = await addBrandToServer(newBrandData);
@@ -66,7 +66,7 @@ export const addNewBrand = createAsyncThunk('brands/addBrand', async (newBrandDa
   }
 });
 
-// מחיקת מותג
+// Delete a brand.
 export const removeBrand = createAsyncThunk('brands/deleteBrand', async (brandId, thunkAPI) => {
   try {
     await deleteBrandFromServer(brandId);
@@ -76,7 +76,7 @@ export const removeBrand = createAsyncThunk('brands/deleteBrand', async (brandId
   }
 });
 
-// עדכון מותג
+// Update a brand.
 export const editBrand = createAsyncThunk('brands/updateBrand', async ({ brandId, updatedData }, thunkAPI) => {
   try {
     const data = await updateBrandOnServer(brandId, updatedData);
@@ -86,7 +86,7 @@ export const editBrand = createAsyncThunk('brands/updateBrand', async ({ brandId
   }
 });
 
-// --- ה-Slice ---
+// --- Slice ---
 const brandsSlice = createSlice({
   name: 'brands',
   initialState: { items: [], selectedBrand: null, loading: false, error: null },
@@ -113,18 +113,18 @@ const brandsSlice = createSlice({
       .addCase(fetchBrandByName.rejected, (state, action) => { state.loading = false; state.error = action.payload; })
 
 
-      // Add (שינוי לשם ה-Thunk החדש)
+      // Add (renamed to match the new thunk).
       .addCase(addNewBrand.fulfilled, (state, action) => { state.error = null; state.items.push(action.payload.brand); })
       .addCase(addNewBrand.rejected, (state, action) => { state.error = action.payload; })
 
-      // Delete (שינוי לשם ה-Thunk החדש)
+      // Delete (renamed to match the new thunk).
       .addCase(removeBrand.fulfilled, (state, action) => {
         state.error = null;
         state.items = state.items.filter(b => (b._id || b.id) !== action.payload);
       })
       .addCase(removeBrand.rejected, (state, action) => { state.error = action.payload; })
 
-      // Update (שינוי לשם ה-Thunk החדש)
+      // Update (renamed to match the new thunk).
       .addCase(editBrand.fulfilled, (state, action) => {
          const updatedBrand = action.payload.brand;
 

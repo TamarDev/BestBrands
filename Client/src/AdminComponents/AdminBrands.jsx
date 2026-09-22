@@ -30,7 +30,7 @@ const AdminBrands = () => {
   const [editingBrand, setEditingBrand] = useState(emptyBrand);
 
   // ==========================
-  // טעינת המותגים
+  // Load brands.
   // ==========================
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const AdminBrands = () => {
 
 
   // ==========================
-  // שינוי שדות הוספה
+  // Update add-form fields.
   // ==========================
 
   const handleNewBrandChange = (e) => {
@@ -51,7 +51,7 @@ const AdminBrands = () => {
 
 
   // ==========================
-  // שינוי שדות עריכה
+  // Update edit-form fields.
   // ==========================
 
   const handleEditChange = (e) => {
@@ -63,7 +63,7 @@ const AdminBrands = () => {
 
 
   // ==========================
-  // הוספת מותג
+  // Add a brand.
   // ==========================
 
   const handleAddBrand = () => {
@@ -76,7 +76,7 @@ const AdminBrands = () => {
 
 
   // ==========================
-  // מחיקת מותג
+  // Delete a brand.
   // ==========================
 
   const handleDelete = (id) => {
@@ -87,7 +87,7 @@ const AdminBrands = () => {
 
 
   // ==========================
-  // התחלת עריכה
+  // Start editing.
   // ==========================
 
   const handleEdit = (brand) => {
@@ -104,7 +104,7 @@ const AdminBrands = () => {
 
 
   // ==========================
-  // שמירת עריכה
+  // Save edits.
   // ==========================
 
   const handleSave = () => {
@@ -121,7 +121,7 @@ const AdminBrands = () => {
 
 
   // ==========================
-  // ביטול עריכה
+  // Cancel editing.
   // ==========================
 
   const handleCancelEdit = () => {

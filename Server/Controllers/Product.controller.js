@@ -113,22 +113,6 @@ export const getProductById = async (req, res) => {
   }
 };
 
-// export const addProduct = async (req, res) => {
-//   try {
-//     const product = new Product(normalizeProductPayload(req.body));
-
-//     await product.save();
-
-//     return res.status(201).json({
-//       message: "Product added successfully",
-//       product,
-//     });
-//   } catch (err) {
-//     return res.status(500).json({ error: err.message });
-//   }
-// };
-
-
 export const addProduct = async (req, res) => {
   try {
     let parsedSizes;

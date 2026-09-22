@@ -66,7 +66,7 @@ export default function DetailisOfProduct() {
 
   const disabledSizeSet = getDisabledSizeSet(sizeOptions);
 
-  // המרה של ערכים כמו brand/category
+  // Normalize values such as brand and category.
   const getDisplayValue = (value) => {
     if (!value) return "לא צוין";
 
@@ -93,7 +93,7 @@ export default function DetailisOfProduct() {
     return String(value);
   };
 
-  // טעינת המוצר
+  // Load the product.
   useEffect(() => {
     if (id) {
       dispatch(fetchProductById(id));
@@ -104,8 +104,8 @@ export default function DetailisOfProduct() {
     };
   }, [id, dispatch]);
 
-  // הוספת מוצר לעגלה
- // הוספת מוצר לעגלה
+  // Add the product to the cart.
+ // Add the product to the cart.
 const handleAddToCart = async () => {
   if (!product) return;
 
@@ -143,7 +143,7 @@ const handleAddToCart = async () => {
   }
 };
 
-  // מצב טעינה
+  // Loading state.
   if (loading) {
     return (
       <Box
@@ -170,7 +170,7 @@ const handleAddToCart = async () => {
     );
   }
 
-  // מצב שגיאה
+  // Error state.
   if (error || !product) {
     return (
       <Alert
@@ -189,7 +189,7 @@ const handleAddToCart = async () => {
   return (
     <>
       {/* ================================= */}
-      {/* כל עמוד המוצר */}
+      {/* Product page */}
       {/* ================================= */}
 
       <Box
@@ -216,10 +216,10 @@ const handleAddToCart = async () => {
 
             display: "grid",
 
-            // תמונה בצד ימין ופרטים בצד שמאל
+            // Image on the right and details on the left.
             direction: "rtl",
 
-            // התמונה נשארת בצד ימין גם כשמקטינים את המסך
+            // Keep the image on the right on smaller screens as well.
             gridTemplateColumns: {
               xs: "1fr 1fr",
               sm: "1.1fr 0.9fr",
@@ -236,7 +236,7 @@ const handleAddToCart = async () => {
           }}
         >
           {/* ================================= */}
-          {/* צד ימין - תמונת המוצר */}
+          {/* Right side - product image */}
           {/* ================================= */}
 
           <Box
@@ -273,7 +273,7 @@ const handleAddToCart = async () => {
           </Box>
 
           {/* ================================= */}
-          {/* צד שמאל - פרטי המוצר */}
+          {/* Left side - product details */}
           {/* ================================= */}
 
           <Stack
@@ -289,7 +289,7 @@ const handleAddToCart = async () => {
               textAlign: "left",
             }}
           >
-            {/* חזרה */}
+            {/* Back */}
 
             <Button
               onClick={() => navigate(-1)}
@@ -313,7 +313,7 @@ const handleAddToCart = async () => {
               ← חזרה
             </Button>
 
-            {/* שם המוצר */}
+            {/* Product name */}
 
             <Typography
               component="h1"
@@ -333,7 +333,7 @@ const handleAddToCart = async () => {
               {product.name}
             </Typography>
 
-            {/* מחיר */}
+            {/* Price */}
 
             <Typography
               sx={{
@@ -347,7 +347,7 @@ const handleAddToCart = async () => {
               {product.price} ₪
             </Typography>
 
-            {/* קו הפרדה */}
+            {/* Divider */}
 
             <Box
               sx={{
@@ -359,7 +359,7 @@ const handleAddToCart = async () => {
               }}
             />
 
-            {/* מידע על המוצר */}
+            {/* Product information */}
 
             <Stack spacing={1}>
               <Typography
@@ -396,7 +396,7 @@ const handleAddToCart = async () => {
               </Typography>
             </Stack>
 
-            {/* תיאור */}
+            {/* Description */}
 
             <Typography
               sx={{
@@ -412,7 +412,7 @@ const handleAddToCart = async () => {
             </Typography>
 
             {/* ================================= */}
-            {/* מידות */}
+            {/* Sizes */}
             {/* ================================= */}
 
             {sizeOptions.length > 0 && (
@@ -499,7 +499,7 @@ const handleAddToCart = async () => {
             )}
 
             {/* ================================= */}
-            {/* הוספה לסל */}
+            {/* Add to cart */}
             {/* ================================= */}
 
             <Button
@@ -529,7 +529,7 @@ const handleAddToCart = async () => {
             </Button>
 
             {/* ================================= */}
-            {/* הודעה */}
+            {/* Message */}
             {/* ================================= */}
 
             {message && (
@@ -548,7 +548,7 @@ const handleAddToCart = async () => {
       </Box>
 
       {/* ================================= */}
-      {/* חלון התחברות */}
+      {/* Login dialog */}
       {/* ================================= */}
 
       <Dialog

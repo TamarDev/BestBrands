@@ -3,7 +3,7 @@ import api from './Axios';
 const route = "/Brands";
 
 // ==========================
-// קבל מותג לפי שם
+// Get a brand by name.
 // ==========================
 
 export const getBrandByName = async (brandName) => {
@@ -16,7 +16,7 @@ export const getBrandByName = async (brandName) => {
 
 
 // ==========================
-// קבל את כל המותגים
+// Get all brands.
 // ==========================
 
 export const getAllBrands = async () => {
@@ -27,7 +27,7 @@ export const getAllBrands = async () => {
 
 
 // ==========================
-// קבל מותג לפי ID
+// Get a brand by ID.
 // ==========================
 
 export const getBrandById = async (brandId) => {
@@ -40,7 +40,7 @@ export const getBrandById = async (brandId) => {
 
 
 // ==========================
-// הוספת מותג
+// Add a brand.
 // ==========================
 
 export const addBrand = async (brandData) => {
@@ -51,12 +51,12 @@ export const addBrand = async (brandData) => {
   formData.append("description", brandData.description);
   formData.append("inventor", brandData.inventor);
 
-  // תמונה רגילה
+  // Regular image.
   if (brandData.image) {
     formData.append("image", brandData.image);
   }
 
-  // תמונת דף המותג
+  // Brand page image.
   if (brandData.imagePage) {
     formData.append("imagePage", brandData.imagePage);
   }
@@ -71,7 +71,7 @@ export const addBrand = async (brandData) => {
 
 
 // ==========================
-// עדכון מותג
+// Update a brand.
 // ==========================
 
 export const updateBrand = async (brandId, brandData) => {
@@ -82,12 +82,12 @@ export const updateBrand = async (brandId, brandData) => {
   formData.append("description", brandData.description);
   formData.append("inventor", brandData.inventor);
 
-  // תמונה רגילה
+  // Regular image.
   if (brandData.image instanceof File) {
     formData.append("image", brandData.image);
   }
 
-  // תמונת דף המותג
+  // Brand page image.
   if (brandData.imagePage instanceof File) {
     formData.append("imagePage", brandData.imagePage);
   }
@@ -102,7 +102,7 @@ export const updateBrand = async (brandId, brandData) => {
 
 
 // ==========================
-// מחיקת מותג
+// Delete a brand.
 // ==========================
 
 export const deleteBrand = async (brandId) => {

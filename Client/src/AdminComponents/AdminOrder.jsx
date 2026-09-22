@@ -31,7 +31,7 @@ const AdminOrders = () => {
   const [editingOrder, setEditingOrder] = useState(emptyOrder);
 
   // ==========================
-  // טעינת הזמנות
+  // Load orders.
   // ==========================
   const loadOrders = async () => {
     try {
@@ -57,7 +57,7 @@ const AdminOrders = () => {
   }, []);
 
   // ==========================
-  // התחלת עריכה
+  // Start editing.
   // ==========================
   const handleEdit = (order) => {
     setEditingId(order._id);
@@ -83,7 +83,7 @@ const AdminOrders = () => {
   };
 
   // ==========================
-  // שינוי סטטוס / הערה
+  // Change the status or note.
   // ==========================
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -95,7 +95,7 @@ const AdminOrders = () => {
   };
 
   // ==========================
-  // שינוי כתובת
+  // Change the address.
   // ==========================
   const handleAddressChange = (e) => {
     const { name, value } = e.target;
@@ -111,7 +111,7 @@ const AdminOrders = () => {
   };
 
   // ==========================
-  // שמירה
+  // Save changes.
   // ==========================
   const handleSave = async () => {
     try {
@@ -131,7 +131,7 @@ const AdminOrders = () => {
   };
 
   // ==========================
-  // ביטול
+  // Cancel editing.
   // ==========================
   const handleCancel = () => {
     setEditingId(null);
@@ -139,7 +139,7 @@ const AdminOrders = () => {
   };
 
   // ==========================
-  // מחיקה
+  // Delete the order.
   // ==========================
   const handleDelete = async (id) => {
     if (!window.confirm("למחוק את ההזמנה?")) {
@@ -160,7 +160,7 @@ const AdminOrders = () => {
   };
 
   // ==========================
-  // סטטוס בעברית
+  // Display status labels.
   // ==========================
   const getStatusText = (status) => {
     switch (status) {
@@ -320,7 +320,7 @@ const AdminOrders = () => {
 
                       <div className="ADMAIN-order-edit-form">
 
-                        {/* סטטוס */}
+                        {/* Status */}
                         <div className="ADMAIN-form-group">
 
                           <label>
@@ -353,7 +353,7 @@ const AdminOrders = () => {
 
                         </div>
 
-                        {/* שם מלא */}
+                        {/* Full name */}
                         <div className="ADMAIN-form-group">
 
                           <label>
@@ -374,7 +374,7 @@ const AdminOrders = () => {
 
                         </div>
 
-                        {/* אימייל */}
+                        {/* Email */}
                         <div className="ADMAIN-form-group">
 
                           <label>
@@ -396,7 +396,7 @@ const AdminOrders = () => {
 
                         </div>
 
-                        {/* כתובת */}
+                        {/* Address */}
                         <div className="ADMAIN-form-group">
 
                           <label>
@@ -417,7 +417,7 @@ const AdminOrders = () => {
 
                         </div>
 
-                        {/* עיר */}
+                        {/* City */}
                         <div className="ADMAIN-form-group">
 
                           <label>
@@ -438,7 +438,7 @@ const AdminOrders = () => {
 
                         </div>
 
-                        {/* מיקוד */}
+                        {/* Postal code */}
                         <div className="ADMAIN-form-group">
 
                           <label>
@@ -459,7 +459,7 @@ const AdminOrders = () => {
 
                         </div>
 
-                        {/* הערה */}
+                        {/* Note */}
                         <div className="ADMAIN-form-group">
 
                           <label>
@@ -476,7 +476,7 @@ const AdminOrders = () => {
 
                         </div>
 
-                        {/* פעולות */}
+                        {/* Actions */}
                         <div className="ADMAIN-order-edit-actions">
 
                           <button
@@ -505,12 +505,12 @@ const AdminOrders = () => {
                        DISPLAY MODE
                     ========================== */
                     <>
-                      {/* צד שמאל - אייקון */}
+                      {/* Left side - icon */}
                       <div className="ADMAIN-order-icon">
                         📦
                       </div>
 
-                      {/* מידע */}
+                      {/* Information */}
                       <div className="ADMAIN-item-info">
 
                         <div className="ADMAIN-item-name-row">
@@ -560,7 +560,7 @@ const AdminOrders = () => {
 
                         </div>
 
-                        {/* כתובת */}
+                        {/* Address */}
                         <div className="ADMAIN-order-address">
 
                           <span className="ADMAIN-order-subtitle">
@@ -583,7 +583,7 @@ const AdminOrders = () => {
 
                         </div>
 
-                        {/* מוצרים */}
+                        {/* Products */}
                         <div className="ADMAIN-order-products">
 
                           <span className="ADMAIN-order-subtitle">
@@ -626,7 +626,7 @@ const AdminOrders = () => {
 
                         </div>
 
-                        {/* הערה */}
+                        {/* Note */}
                         {order.note && (
                           <div className="ADMAIN-order-note">
 
@@ -640,7 +640,7 @@ const AdminOrders = () => {
 
                       </div>
 
-                      {/* פעולות */}
+                      {/* Actions */}
                       <div className="ADMAIN-item-actions">
 
                         <button

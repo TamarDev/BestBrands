@@ -1,28 +1,28 @@
 
 
-/* אני הוספתי  */
+/* Added styles */
 
 
 
-/* מיכל הקרוסלה - חותך את מה שיוצא מגבולות המסך */
+/* Carousel container - clip content that extends beyond the viewport. */
 .slider-container {
     overflow: hidden;
     width: 100%;
-    background-color: #FAF7F0; /* קרם בהיר, תואם לגוון הרקע החם של הדף */
+    background-color: #FAF7F0; /* Light cream matching the page's warm background. */
     padding: 20px 0;
     display: flex;
     align-items: center;
     position: relative;
 }
 
-/* המסילה שזזה - מכילה את כל האלמנטים בשורה אחת ארוכה */
+/* Moving track containing all elements in one long row. */
 .slider-track {
     display: flex;
     width: max-content;
     animation: scroll 20s linear infinite;
 }
 
-/* כל מותג בנפרד */
+/* Individual brand */
 .slide {
     flex: 0 0 220px;
     height: 140px;
@@ -40,7 +40,7 @@
     align-items: center;
     justify-content: center;
     padding: 16px;
-    background: #FEFDFB; /* קרם-לבן עדין, לא לבן חד */
+    background: #FEFDFB; /* Soft off-white rather than bright white. */
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
@@ -58,18 +58,18 @@
     display: block;
 }
 
-/* האנימציה שמניעה את הקרוסלה */
+/* Animation that moves the carousel. */
 @keyframes scroll {
     0% {
         transform: translateX(0);
     }
     100% {
-        /* מזיז את המסילה בדיוק ב-50% שמאלה (חצי מהרוחב שלה, שזה הסט הראשון) */
+        /* Move the track exactly 50% left, which is half its width and the first set. */
         transform: translateX(-50%); 
     }
 }
 
-/* עצירת האנימציה כשהעכבר מרחף מעל הקרוסלה */
+/* Pause the animation when the pointer hovers over the carousel. */
 .slider-container:hover .slider-track {
     animation-play-state: paused;
 }

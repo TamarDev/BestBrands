@@ -21,7 +21,7 @@ const AdminCategories = () => {
   const [editingName, setEditingName] = useState("");
 
   // ==========================
-  // טעינת כל הקטגוריות
+  // Load all categories.
   // ==========================
 
   const loadCategories = async () => {
@@ -44,7 +44,7 @@ const AdminCategories = () => {
   }, []);
 
   // ==========================
-  // הוספה
+  // Add a category.
   // ==========================
 
   const handleAdd = async () => {
@@ -64,7 +64,7 @@ const AdminCategories = () => {
   };
 
   // ==========================
-  // התחלת עריכה
+  // Start editing.
   // ==========================
 
   const handleEdit = (category) => {
@@ -73,7 +73,7 @@ const AdminCategories = () => {
   };
 
   // ==========================
-  // שמירת עריכה
+  // Save edits.
   // ==========================
 
   const handleSave = async () => {
@@ -94,7 +94,7 @@ const AdminCategories = () => {
   };
 
   // ==========================
-  // ביטול עריכה
+  // Cancel editing.
   // ==========================
 
   const handleCancelEdit = () => {
@@ -103,7 +103,7 @@ const AdminCategories = () => {
   };
 
   // ==========================
-  // מחיקה
+  // Delete the category.
   // ==========================
 
   const handleDelete = async (id) => {

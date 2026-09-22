@@ -38,7 +38,7 @@ export default function CartDrawer() {
 
   return (
     <>
-      {/* רקע כהה */}
+      {/* Dark overlay */}
       {isCartPreviewOpen && (
         <div
           className="cart-drawer-overlay"
@@ -46,14 +46,14 @@ export default function CartDrawer() {
         />
       )}
 
-      {/* העגלה */}
+      {/* Cart */}
       <aside
         className={`cart-drawer ${
           isCartPreviewOpen ? "open" : ""
         }`}
       >
 
-        {/* כותרת */}
+        {/* Heading */}
         <div className="cart-drawer-header">
 
           <h2>
@@ -70,7 +70,7 @@ export default function CartDrawer() {
         </div>
 
 
-        {/* תוכן */}
+        {/* Content */}
         <div className="cart-drawer-content">
 
           <div className="cart-drawer-title">
@@ -100,7 +100,7 @@ export default function CartDrawer() {
                     key={itemKey}
                   >
 
-                    {/* תמונה */}
+                    {/* Image */}
                     <div className="cart-drawer-image">
                       <img
                         src={item.product?.image}
@@ -109,7 +109,7 @@ export default function CartDrawer() {
                     </div>
 
 
-                    {/* פרטים */}
+                    {/* Details */}
                     <div className="cart-drawer-info">
 
                       <h3>
@@ -191,7 +191,7 @@ export default function CartDrawer() {
         </div>
 
 
-        {/* תחתית */}
+        {/* Footer */}
         <div className="cart-drawer-footer">
 
           <div className="cart-drawer-total">

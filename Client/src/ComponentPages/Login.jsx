@@ -36,18 +36,18 @@ export default function Login() {
 
             goAfterLogin(data?.user);
         } catch {
-            // השגיאה כבר משתקפת ב-error מה-store
+            // The error is already exposed through the store's error state.
         }
 
     };
 
-    // מיוצב עם useCallback כדי ש-<GoogleLogin> לא יאתחל מחדש את google.accounts.id בכל render
+    // Stabilize with useCallback so <GoogleLogin> does not reinitialize google.accounts.id on every render.
     const handleGoogleSuccess = useCallback(async (credentialResponse) => {
         try {
             const data = await dispatch(continueWithGoogle({ credential: credentialResponse.credential, mode: "login" })).unwrap();
             goAfterLogin(data?.user);
         } catch {
-            // השגיאה כבר משתקפת ב-error מה-store
+            // The error is already exposed through the store's error state.
         }
     }, [dispatch, goAfterLogin]);
 

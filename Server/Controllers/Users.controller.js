@@ -31,7 +31,7 @@ export const UpdateUsers = async (req, res) => {
 
         const allowedFields = ['firstName', 'lastName', 'email', 'address', 'city', 'password'];
 
-        // רק מנהל רשאי לשנות תפקיד; אצל משתמש רגיל השדה מסונן בשקט
+        // Only admins may change role; silently dropped for regular users
         if (req.user?.role === 'admin') {
             allowedFields.push('role');
         }

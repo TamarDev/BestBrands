@@ -85,7 +85,7 @@
 
   height: fit-content;
 
-  /* נשאר צמוד לראש המסך בזמן גלילה */
+  /* Stay attached to the top of the screen while scrolling. */
   position: sticky;
 
   top: 20px;
@@ -544,7 +544,7 @@
   height: 30px;
 }
 
-/* שני הסליידרים נמצאים אחד מעל השני */
+/* Stack the two sliders vertically. */
 .range-slider {
   position: absolute;
 
@@ -568,7 +568,7 @@
   direction: ltr;
 }
 
-/* הסליידר השני - מקסימום */
+/* Second slider - maximum value */
 .range-slider:last-child {
   z-index: 2;
 }

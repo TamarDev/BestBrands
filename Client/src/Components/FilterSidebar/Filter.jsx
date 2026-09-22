@@ -13,14 +13,14 @@ export default function Filter({
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
 
-  // טווח מחיר קבוע: 10 - 2000
+  // Fixed price range: 10-2000.
   const MIN_PRICE = 10;
   const MAX_PRICE = 2000;
 
   const [minPrice, setMinPrice] = useState(MIN_PRICE);
   const [maxPrice, setMaxPrice] = useState(MAX_PRICE);
 
-  // קטגוריות
+  // Categories.
   const categories = useMemo(() => {
     if (!Array.isArray(products)) return [];
 
@@ -36,7 +36,7 @@ export default function Filter({
     );
   }, [products]);
 
-  // צבעים
+  // Colors.
   const colors = useMemo(() => {
     if (!Array.isArray(products)) return [];
 
@@ -49,7 +49,7 @@ export default function Filter({
     );
   }, [products]);
 
-  // סינון המוצרים
+  // Filter products.
   const filteredProducts = useMemo(() => {
     if (!Array.isArray(products)) return [];
 
@@ -82,7 +82,7 @@ export default function Filter({
     maxPrice,
   ]);
 
-  // איפוס סינון
+  // Reset filters.
   const resetFilters = () => {
     setSelectedCategory("");
     setSelectedColor("");
@@ -93,14 +93,14 @@ export default function Filter({
   return (
     <div className="filter-page">
 
-      {/* כותרת */}
+      {/* Heading */}
       {showHeader && (
         <div className="filter-header">
           <h2>{title}</h2>
         </div>
       )}
 
-      {/* טעינה */}
+      {/* Loading */}
       {loading && (
         <div className="filter-status">
           <FaSpinner
@@ -110,7 +110,7 @@ export default function Filter({
         </div>
       )}
 
-      {/* שגיאה */}
+      {/* Error */}
       {error && (
         <div className="filter-status error">
           שגיאה: {error}
@@ -123,7 +123,7 @@ export default function Filter({
           {/* SIDEBAR */}
           <aside className="filter-sidebar">
 
-            {/* קטגוריות */}
+            {/* Categories */}
             <div className="filter-section">
               <h3>קטגוריות</h3>
 
@@ -155,7 +155,7 @@ export default function Filter({
               ))}
             </div>
 
-            {/* צבע */}
+            {/* Color */}
             <div className="filter-section">
               <h3>צבע</h3>
 
@@ -187,7 +187,7 @@ export default function Filter({
               ))}
             </div>
 
-            {/* טווח מחיר */}
+            {/* Price range */}
             <div className="filter-section price-filter">
               <h3>טווח מחיר</h3>
 
@@ -198,7 +198,7 @@ export default function Filter({
 
               <div className="range-container">
 
-                {/* מחיר מינימלי */}
+                {/* Minimum price */}
                 <input
                   type="range"
                   min={MIN_PRICE}
@@ -214,7 +214,7 @@ export default function Filter({
                   className="range-slider"
                 />
 
-                {/* מחיר מקסימלי */}
+                {/* Maximum price */}
                 <input
                   type="range"
                   min={MIN_PRICE}
@@ -233,7 +233,7 @@ export default function Filter({
               </div>
             </div>
 
-            {/* איפוס */}
+            {/* Reset */}
             <button
               className="reset-btn"
               onClick={resetFilters}

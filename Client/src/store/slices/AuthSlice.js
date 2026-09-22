@@ -4,7 +4,7 @@ import { login, register, getCurrentUser, googleAuth } from "../../API/AuthApi.j
 
 
 
-// התחברות
+// Login.
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (loginData, thunkAPI) => {
@@ -30,7 +30,7 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-// התחברות/הרשמה עם גוגל (מתחברת לחשבון קיים או יוצרת חשבון חדש אוטומטית)
+// Login/register with Google; connect to an existing account or create one automatically.
 export const continueWithGoogle = createAsyncThunk(
   "auth/continueWithGoogle",
   async ({ credential, mode }, thunkAPI) => {
@@ -50,7 +50,7 @@ export const continueWithGoogle = createAsyncThunk(
   }
 );
 
-// הרשמה
+// Register.
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (registerData, thunkAPI) => {
@@ -134,8 +134,8 @@ const AuthSlice = createSlice({
         state.error = action.payload;
         state.authInitialized = true;
 
-        // אם כבר אין טוקן שמור (למשל ניסיון כושל להתחבר כמנהל) —
-        // מנקים גם את ה-state, כדי שלא יישאר "מחובר" בלי טוקן אמיתי
+        // If no stored token remains, for example after a failed admin login attempt,
+        // clear the state as well so the user is not considered logged in without a valid token.
         if (!localStorage.getItem("token")) {
           state.user = null;
           state.token = null;
