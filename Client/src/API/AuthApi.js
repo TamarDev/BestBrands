@@ -1,0 +1,27 @@
+import api from "./Axios"; // Use the central Axios instance
+
+export const login = async (user) => {
+  const response = await api.post("/Auth/login", user);
+  return response.data;
+};
+
+export const register = async (user) => {
+  const response = await api.post("/Auth/register", user);
+  return response.data;
+};
+
+export const googleAuth = async (credential, mode) => {
+  const response = await api.post("/Auth/google", { credential, mode });
+  return response.data;
+};
+
+export const setPassword = async (password) => {
+  const response = await api.post("/Auth/set-password", { password });
+  return response.data;
+};
+
+// Restore the user after a page refresh.
+export const getCurrentUser = async () => {
+  const response = await api.get("/Auth/me");
+  return response.data;
+};
