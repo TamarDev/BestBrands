@@ -1,0 +1,73 @@
+/* Added styles */
+
+/* Carousel container - clip content that extends beyond the viewport. */
+.slider-container {
+  overflow: hidden;
+  width: 100%;
+  background-color: #faf7f0; /* Light cream matching the page's warm background. */
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Moving track containing all elements in one long row. */
+.slider-track {
+  display: flex;
+  width: max-content;
+  animation: scroll 20s linear infinite;
+}
+
+/* Individual brand */
+.slide {
+  flex: 0 0 220px;
+  height: 140px;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide a {
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: #fefdfb; /* Soft off-white rather than bright white. */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+}
+
+.slide a:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Animation that moves the carousel. */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Move the track exactly 50% left, which is half its width and the first set. */
+    transform: translateX(-50%);
+  }
+}
+
+/* Pause the animation when the pointer hovers over the carousel. */
+.slider-container:hover .slider-track {
+  animation-play-state: paused;
+}
